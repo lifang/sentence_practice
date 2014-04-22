@@ -1,0 +1,227 @@
+@charset "utf-8";
+* { padding: 0; margin: 0;}
+body { font-family:"微软雅黑", "宋体", Arial; background: #ffffff; font-size: 14px; color: #333;}
+img { border: none;}
+li { list-style: none;}
+a { text-decoration: none; color: #333;}
+input,button,select,textarea,img{outline:none}
+button { border: none; cursor: pointer;}
+
+.btn_box { position: absolute; bottom: 50px; text-align: center; width: 300px;}
+a.orange_btn, a.yellow_btn, a.gray_btn {
+	width: 300px;
+	height: 46px;
+	line-height: 46px;
+	display: block; 
+	text-align: center; 
+	color: #FFF;
+	border-radius: 3px;
+	margin: 15px 0;
+	font-size: 16px;
+	text-shadow: 1px 1px 1px rgba(0,0,0,0.4);
+	display: inline-block;
+}
+a.orange_btn { background: #fd6e50; border-bottom: 2px #e95740 solid;}
+a.yellow_btn { background: #ffce55; border-bottom: 2px #f7bb41 solid;}
+a.gray_btn { background: #a4a9ad; border-bottom: 2px #84898d solid;}
+
+article { 
+	overflow: hidden; 
+	position: relative; 
+	width: 300px; 
+	margin: 0 auto;
+}
+article:after{
+	display: block;
+	overflow:hidden;
+	clear: both;
+	height:0;
+	visibility:hidden;
+	content:".";
+}
+
+/*2*/
+.ad { width:300px; height:200px; position: relative; margin-top: 10px; overflow: hidden;}
+.ad ul { display: block; width:300px;}
+.ad li { width: 300px; height:200px; position: absolute; top: 0px; left: 0px;}
+.ad li img { border-radius: 3px;}
+
+
+/*3*/
+.aboutMe {}
+.aboutMe h1 { font-size: 18px; color: #fd6e50; line-height: 36px; border-bottom: 1px #fd6e50 solid;}
+.aboutMe li { height: 36px; line-height: 36px; margin: 20px 10px; font-size: 16px; padding-left: 20px;}
+.aboutMe li label { display: inline-block; text-align: right; padding-left: 30px;}
+.aboutMe li label.grade_icon { background: url(/assets/grade_icon.png) no-repeat 0px center; background-size: 26px 26px;}
+.aboutMe li label.complete_icon { background: url(/assets/complete_icon.png) no-repeat 0px center; background-size: 26px 26px;}
+.aboutMe li label.gold_icon { background: url(/assets/gold_icon.png) no-repeat 0px center; background-size: 26px 26px;}
+.aboutMe li span { width: 100px; display: inline-block;}
+.aboutMe li a { 
+	display: inline-block; 
+	width: 40px; 
+	height: 26px; 
+	line-height: 26px; 
+	color: #FFF;
+	text-align: center; 
+	background: #50c1e9;
+	border-radius: 3px;
+}
+
+
+/*4*/
+.exercises { margin-top: 10px;}
+.ex_title { height: 46px; color: #fff;}
+.ex_title .timer { width: 260px; height: 22px; background: #e1e4e9; padding: 2px; float: left;}
+.ex_title .timer p { background: #a0d468; height: 22px; line-height: 22px; text-align: center;}
+.ex_title .num { 
+	width: 26px; 
+	height: 26px; 
+	line-height: 26px; 
+	text-align: center; 
+	background: #a0d468; 
+	border-radius: 50%;
+	float: left;
+	margin-left: 10px;
+}
+.question { background: #f1f2f6; padding: 0 5px; line-height: 24px;}
+.ex_con {}
+.ex_con .question { margin-bottom: 10px; line-height: 24px;}
+.ex_con .answer { margin-bottom: 30px;}
+.ex_con .answer .answer_item { border-bottom: 1px #e1e4e9 solid; height: 30px; line-height: 30px; padding: 0 5px;}
+.ex_con .answer li { display: inline-block; height: 30px;}
+
+.chooseArea {}
+.chooseArea li { display: inline-block; padding: 2px 5px; margin: 5px; border: 1px #e1e4e9 solid;}
+
+.btn_box .s_btn { width: 120px; margin: 0 10px;}
+
+/*tab*/
+.tab { 
+	width: 260px; 
+	padding: 10px; 
+	border-radius: 3px; 
+	box-shadow: 0px 0px 5px rgba(0,0,0,0.5); 
+	background: #FFF;
+}
+.tab_title { height: 40px; line-height: 40px;}
+.tab_title h1.reply_icon {
+	width: 80px;
+	margin: 0 auto;
+	background: url(/assets/reply_icon.png) no-repeat left center;
+	background-size: 40px 40px;
+	padding-left: 50px;
+	font-size: 16px;
+}
+
+.tab_con { margin: 20px 0; overflow: hidden;}
+.tab_con p { line-height: 24px; text-align: center;}
+.tab .true, .tab .false { 
+	width: 260px; 
+	padding-top: 100px; 
+	text-align: center;
+}
+.tab .true { background: url(/assets/smile.png) no-repeat center top;}
+.tab .false { background: url(/assets/cry.png) no-repeat center top;}
+.tab .false { background: url(/assets/time.png) no-repeat center top;}
+.tab_btn { text-align: center;}
+.tab_btn a.orange_btn { width: 120px;}
+
+/*8*/
+.practice { width: 170px; margin: 10px auto;}
+.practice h1 {
+	text-align: center;
+	height: 40px; 
+	line-height: 40px;
+	background: url(/assets/smile.png) no-repeat left center;
+	background-size: 40px 40px;
+	padding-left: 50px;
+	font-size: 16px;
+}
+
+.practice li { height: 36px; line-height: 36px; margin: 20px 10px; font-size: 16px; padding-left: 20px;}
+.practice li label { display: inline-block; text-align: right; padding-left: 30px;}
+.practice li label.reply_icon { background: url(/assets/reply_icon.png) no-repeat 0px center; background-size: 26px 26px;}
+.practice li label.complete_icon { background: url(/assets/complete_icon.png) no-repeat 0px center; background-size: 26px 26px;}
+.practice li label.gold_icon { background: url(/assets/gold_icon.png) no-repeat 0px center; background-size: 26px 26px;}
+.practice li span {display: inline-block;}
+
+
+/*9*/
+.practice h1.loser { background: url(/assets/cry.png) no-repeat left center; background-size: 40px 40px;}
+
+/*11*/
+.tooltip {
+	height: 30px; 
+	line-height: 30px; 
+	background: #000; 
+	color: #FFF; 
+	position: absolute; 
+	top: -40px; 
+	left: 0px;
+	padding: 10px;
+	border-radius: 3px;
+}
+.arrow {
+	width:0;
+    height:0;
+    border-left:10px solid transparent;
+    border-right:10px solid transparent;
+    border-top:10px solid #000;
+	position: absolute;
+	right: 20px;
+	bottom: -10px;
+}
+
+/*12*/
+.recommend { margin: 10px 20px;}
+.recommend h1 {
+	text-align: center;
+	height: 40px; 
+	line-height: 40px;
+	font-size: 16px;
+}
+.recommend .money_icon {
+	width: 80px;
+	height: 80px;
+	margin: 20px auto;
+	background: url(/assets/money_icon.png) no-repeat;
+	background-size: 80px 80px;
+}
+
+/*13*/
+.rankOrder { margin: 10px 0;}
+.rankOrder h1 {
+	text-align: center;
+	height: 40px; 
+	line-height: 40px;
+	font-size: 16px;
+}
+.step { 
+	width: 300px; 
+	height: 162px;
+	margin-top: 20px; 
+	background: url(/assets/b.png) no-repeat center center; 
+	background-size: 300px 162px;
+}
+
+/*14*/
+.news { margin: 10px 0;}
+.news h1 {
+	height: 40px; 
+	line-height: 40px;
+	font-size: 16px;
+}
+.news .sh { color: #999;}
+.news .sh span { margin-right: 5px;}
+.news_icon {
+	width: 300px; 
+	height: 162px; 
+	background: url(/assets/a.png) no-repeat center center; 
+	background-size: 300px 162px;
+}
+
+
+
+
+
+
