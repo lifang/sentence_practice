@@ -1,0 +1,46 @@
+<script>
+$.extend({  
+  getUrlVars: function(){  
+    var vars = [], hash;  
+    var hashes = window.location.href.slice(window.location.href.indexOf('?#') + 1).split('&');  
+    for(var i = 0; i < hashes.length; i++)  
+    {  
+      hash = hashes[i].split('=');  
+      vars.push(hash[0]);  
+      vars[hash[0]] = hash[1];  
+    }  
+    return vars;  
+  },  
+  getUrlVar: function(name){  
+    return $.getUrlVars()[name];  
+  }  
+}); 
+$(document).ready(function(){
+	var access_token = $.getUrlVars('access_token');
+	$.ajax({
+      async:"GET",
+      url: "<%= REQUEST_OPENID_URL %>?access_token="+access_token+"",
+      dataType: "json",
+      ,
+      success: function(data){
+      	var error = date["error"];
+      	if(error.length > 0)
+      	{
+      		alert("e信息错误，请重新登录！");	
+      	}	
+      	else
+      	{
+      		alert("client_id="+date["client_id"]+"&open_id="+date["openid"]);	
+      	}	
+        // if(data){
+        //   (window.opener.location.href.split('?last_url=')[1]==null) ? window.opener.location.reload() : window.opener.location.href = window.opener.location.href.split('?last_url=')[1] ;
+        //   window.close();
+        //   window.close();
+        // }else{
+        //   window.opener.location.reload();
+        //   window.close();
+        // }
+      }
+	});
+});
+</script>

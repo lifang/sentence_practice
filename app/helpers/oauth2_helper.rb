@@ -2,6 +2,7 @@
 module Oauth2Helper
   
   #qq登录参数
+
   REQUEST_URL_QQ="https://graph.qq.com/oauth2.0/authorize"
   #请求openId
   REQUEST_OPENID_URL="https://graph.qq.com/oauth2.0/me"
