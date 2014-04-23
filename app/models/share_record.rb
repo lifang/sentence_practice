@@ -1,3 +1,4 @@
+#encoding: utf-8
 class ShareRecord < ActiveRecord::Base
 	attr_protected :authentications
 	belongs_to :user
