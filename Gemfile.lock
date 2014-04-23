@@ -47,6 +47,8 @@ GEM
     multi_json (1.9.2)
     mysql2 (0.3.10)
     polyglot (0.3.4)
+    prototype-rails (3.2.1)
+      rails (~> 3.2)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -92,5 +94,6 @@ PLATFORMS
 DEPENDENCIES
   jquery-rails (~> 2.1.0)
   mysql2 (= 0.3.10)
+  prototype-rails
   rails (= 3.2.1)
   uglifier (>= 1.0.3)

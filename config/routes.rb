@@ -13,6 +13,11 @@ SentencePractice::Application.routes.draw do
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
   resources :sentences
+  resources :logins do
+    collection do
+      get :request_qq, :respond_qq
+    end
+  end
   # Sample resource route with options:
   #   resources :products do
   #     member do
