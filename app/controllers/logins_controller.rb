@@ -7,4 +7,37 @@ class LoginsController < ApplicationController
   def respond_qq
     render :layout=>"application"
   end
+
+  def enter
+  	begin
+      meters=params[:access_token].split("&")
+      access_token=meters[0].split("=")[1]
+      expires_in=meters[1].split("=")[1].to_i
+      openid=params[:open_id]
+      unless openid
+        flash[:share_notice]="网络繁忙，稍后重试"
+        throw_error
+      end
+      @user= User.find_by_open_id(openid)
+      if @user.nil?
+      	@user = User.create(:level => 0, :complete_per_cent =>0, :gold => 0, :open_id => openid)
+        cookies[:user_id] = @user.id
+      else
+      	cookies[:user_id] = @user.id
+      end
+      data=true
+    rescue
+      data=false
+    end
+    respond_to do |format|
+      format.json {
+        render :json=>data
+      }
+    end	
+  end
+
+  def exit
+  	cookies[:user_id] = nil	
+  	redirect_to "/"
+  end	
 end

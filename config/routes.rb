@@ -15,7 +15,8 @@ SentencePractice::Application.routes.draw do
   resources :sentences
   resources :logins do
     collection do
-      get :request_qq, :respond_qq
+      get :request_qq, :respond_qq, :exit
+      post :enter
     end
   end
   # Sample resource route with options:
