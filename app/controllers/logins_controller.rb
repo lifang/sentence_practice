@@ -20,7 +20,7 @@ class LoginsController < ApplicationController
       end
       @user= User.find_by_open_id(openid)
       if @user.nil?
-      	@user = User.create(:level => 0, :complete_per_cent =>0, :gold => 0, :open_id => openid)
+      	@user = User.create(:level => User::INIT_LEVEL, :complete_per_cent => User::INIT_COMPLETE_PER_CENT, :gold => User::FIRST_REWORD_GOLD, :open_id => openid)
         cookies[:user_id] = @user.id
       else
       	cookies[:user_id] = @user.id
