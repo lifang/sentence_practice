@@ -1,42 +1,36 @@
-<script>
-function select(obj)
-{
-    var word = $(obj).text();
-    var answer = $(obj).parents(".ex_con").find(".answer_text").val();
-    answer = answer + " " + word;
-    $(obj).parents(".ex_con").find(".answer_text").val(answer);
-    var text_li = "<li>"+ word + "</li>";
-    $(obj).parents(".ex_con").find(".answer").find("ul").append(text_li);
-}
-</script>
 <section class="exercises">
 	<div class="ex_title">
     	<div class="timer"><p style="width: 50%;">剩余 30 秒</p></div>
         <div class="num">2</div>
     </div>
+    <% count = 0 %>
     <% @questions.each do |question| %>
-    <div class="ex_con">
+    <div class="ex_con" id="question_<%= count %>">
     	<div class="question"><%= question.translation %>。</div>
         <div class="answer">
                 <ul>
+                    <li></li>
                 </ul>
         </div>
         <input type="text" value="" class="answer_text">
+        <input type="text" value="" class="index_order">
         <input type="text" value="<%= question.original_sentence %>" class="correct_answer">
         <div class="chooseArea">
         	<ul>
                 <% question.original_sentence.split(" ").each do |word| %>
-                    <li onclick="select(this)"><%= word %></li>
+                    <li onclick="select_item(this)"><%= word %></li>
                 <% end %>
                 <% question.similar_words.split(",").each do |word| %>
-                    <li onclick="select(this)" style="display:none;"><%= word %></li>
+                    <li onclick="select_item(this)" style="display:none;"><%= word %></li>
                 <% end %>
             </ul>
         </div>
     </div>
+    <% count += 1 %>
     <% end %>
 </section>
 <section class="btn_box">
-	<a href="#" class="orange_btn s_btn">完成</a>
-    <a href="#" class="gray_btn s_btn">退一步</a>
+    <input type="text" value="" class="current_question_id">
+	<a href="javascript:void(0)" class="orange_btn s_btn">完成</a>
+    <a href="javascript:void(0)" class="gray_btn s_btn" onclick="back_step(this)">退一步</a>
 </section>

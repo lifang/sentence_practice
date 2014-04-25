@@ -4,5 +4,4 @@ class QuestionsController < ApplicationController
 		@user = User.find_by_id user_id
 		@questions = Question.where(["level_types = ?", @user.level]).limit(5)
 	end
-
 end
