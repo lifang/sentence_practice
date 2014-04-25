@@ -1,25 +1,23 @@
 @charset "utf-8";
 * { padding: 0; margin: 0;}
-body { font-family:"微软雅黑", "宋体", Arial; background: #ffffff; font-size: 14px; color: #333;}
+body { font-family:"微软雅黑", "宋体", Arial; background: #ffffff; font-size: 16px; color: #333;}
 img { border: none;}
 li { list-style: none;}
 a { text-decoration: none; color: #333;}
 input,button,select,textarea,img{outline:none}
 button { border: none; cursor: pointer;}
 
-.btn_box { position: absolute; bottom: 50px; text-align: center; width: 300px;}
+.btn_box { text-align: center; margin: 20px; position: relative;}
 a.orange_btn, a.yellow_btn, a.gray_btn {
-	width: 300px;
 	height: 46px;
 	line-height: 46px;
 	display: block; 
 	text-align: center; 
 	color: #FFF;
 	border-radius: 3px;
-	margin: 15px 0;
-	font-size: 16px;
+	margin: 30px 0;
+	font-size: 18px;
 	text-shadow: 1px 1px 1px rgba(0,0,0,0.4);
-	display: inline-block;
 }
 a.orange_btn { background: #fd6e50; border-bottom: 2px #e95740 solid;}
 a.yellow_btn { background: #ffce55; border-bottom: 2px #f7bb41 solid;}
@@ -28,7 +26,6 @@ a.gray_btn { background: #a4a9ad; border-bottom: 2px #84898d solid;}
 article { 
 	overflow: hidden; 
 	position: relative; 
-	width: 300px; 
 	margin: 0 auto;
 }
 article:after{
@@ -41,16 +38,20 @@ article:after{
 }
 
 /*2*/
-.ad { width:300px; height:200px; position: relative; margin-top: 10px; overflow: hidden;}
-.ad ul { display: block; width:300px;}
-.ad li { width: 300px; height:200px; position: absolute; top: 0px; left: 0px;}
-.ad li img { border-radius: 3px;}
+.ad { position: relative; overflow: hidden; height: 250px; margin-bottom: 50px;}
+.ad ul { display: block; height: 250px; margin: 0 auto;}
+.ad li { height: 250px;}
+.ad li.ad01 { background: url(/assets/ad01.png) no-repeat center center #41a6ff; background-size: 320px 250px;}
+.ad li.ad02 { background: url(/assets/ad02.png) no-repeat center center #2fd7da; background-size: 320px 250px;}
+.ad li.ad03 { background: url(/assets/ad03.png) no-repeat center center #b28f82; background-size: 320px 250px;}
+.ad li.ad04 { background: url(/assets/ad04.png) no-repeat center center #b0c828; background-size: 320px 250px;}
+.ad li.ad05 { background: url(/assets/ad05.png) no-repeat center center #f05050; background-size: 320px 250px;}
 
 
 /*3*/
-.aboutMe {}
-.aboutMe h1 { font-size: 18px; color: #fd6e50; line-height: 36px; border-bottom: 1px #fd6e50 solid;}
-.aboutMe li { height: 36px; line-height: 36px; margin: 20px 10px; font-size: 16px; padding-left: 20px;}
+.aboutMe { margin: 20px 20px 50px 20px;}
+.aboutMe h1 { font-size: 18px; color: #fd6e50; line-height: 36px; border-bottom: 1px #fd6e50 solid; padding-left: 35px;}
+.aboutMe li { height: 36px; line-height: 36px; margin: 20px 10px; font-size: 18px; padding-left: 20px;}
 .aboutMe li label { display: inline-block; text-align: right; padding-left: 30px;}
 .aboutMe li label.grade_icon { background: url(/assets/grade_icon.png) no-repeat 0px center; background-size: 26px 26px;}
 .aboutMe li label.complete_icon { background: url(/assets/complete_icon.png) no-repeat 0px center; background-size: 26px 26px;}
@@ -69,9 +70,9 @@ article:after{
 
 
 /*4*/
-.exercises { margin-top: 10px;}
-.ex_title { height: 46px; color: #fff;}
-.ex_title .timer { width: 260px; height: 22px; background: #e1e4e9; padding: 2px; float: left;}
+.exercises { margin: 20px 20px 50px 20px;}
+.ex_title {color: #fff; position: relative; margin-bottom: 20px;}
+.ex_title .timer { height: 22px; background: #e1e4e9; padding: 2px; margin-right: 30px;}
 .ex_title .timer p { background: #a0d468; height: 22px; line-height: 22px; text-align: center;}
 .ex_title .num { 
 	width: 26px; 
@@ -80,20 +81,20 @@ article:after{
 	text-align: center; 
 	background: #a0d468; 
 	border-radius: 50%;
-	float: left;
-	margin-left: 10px;
+	position: absolute;
+	top: 0px; 
+	right: 0px;
 }
 .question { background: #f1f2f6; padding: 0 5px; line-height: 24px;}
 .ex_con {}
 .ex_con .question { margin-bottom: 10px; line-height: 24px;}
-.ex_con .answer { margin-bottom: 30px;}
-.ex_con .answer .answer_item { border-bottom: 1px #e1e4e9 solid; height: 30px; line-height: 30px; padding: 0 5px;}
+.ex_con .answer { margin-bottom: 30px; border: 1px #e1e4e9 solid; line-height: 30px; padding: 0 5px;}
 .ex_con .answer li { display: inline-block; height: 30px;}
 
 .chooseArea {}
-.chooseArea li { display: inline-block; padding: 2px 5px; margin: 5px; border: 1px #e1e4e9 solid;}
+.chooseArea li { display: inline-block; padding: 2px 5px; margin: 5px; border: 1px #e1e4e9 solid; font-size: 18px;}
 
-.btn_box .s_btn { width: 120px; margin: 0 10px;}
+.btn_box .s_btn { width: 120px; margin: 0 10px; display: inline-block;}
 
 /*tab*/
 .tab { 
@@ -124,10 +125,10 @@ article:after{
 .tab .false { background: url(/assets/cry.png) no-repeat center top;}
 .tab .false { background: url(/assets/time.png) no-repeat center top;}
 .tab_btn { text-align: center;}
-.tab_btn a.orange_btn { width: 120px;}
+.tab_btn a.orange_btn { width: 120px; display: inline-block;}
 
 /*8*/
-.practice { width: 170px; margin: 10px auto;}
+.practice { width: 170px; margin: 20px auto 50px auto;}
 .practice h1 {
 	text-align: center;
 	height: 40px; 
@@ -135,7 +136,7 @@ article:after{
 	background: url(/assets/smile.png) no-repeat left center;
 	background-size: 40px 40px;
 	padding-left: 50px;
-	font-size: 16px;
+	font-size: 18px;
 }
 
 .practice li { height: 36px; line-height: 36px; margin: 20px 10px; font-size: 16px; padding-left: 20px;}
@@ -156,7 +157,7 @@ article:after{
 	background: #000; 
 	color: #FFF; 
 	position: absolute; 
-	top: -40px; 
+	top: -60px; 
 	left: 0px;
 	padding: 10px;
 	border-radius: 3px;
@@ -173,12 +174,12 @@ article:after{
 }
 
 /*12*/
-.recommend { margin: 10px 20px;}
+.recommend { margin: 10px 20px 50px 20px;}
 .recommend h1 {
 	text-align: center;
 	height: 40px; 
 	line-height: 40px;
-	font-size: 16px;
+	font-size: 18px;
 }
 .recommend .money_icon {
 	width: 80px;
@@ -189,27 +190,20 @@ article:after{
 }
 
 /*13*/
-.rankOrder { margin: 10px 0;}
-.rankOrder h1 {
-	text-align: center;
-	height: 40px; 
-	line-height: 40px;
-	font-size: 16px;
-}
-.step { 
-	width: 300px; 
-	height: 162px;
-	margin-top: 20px; 
+.rankOrder { margin: 20px 20px 50px 20px;}
+.rankOrder h1 { font-size: 18px; color: #fd6e50; line-height: 36px; border-bottom: 1px #fd6e50 solid; padding-left: 35px;}
+.step {
+	height: 460px;
 	background: url(/assets/b.png) no-repeat center center; 
-	background-size: 300px 162px;
+	background-size: 320px 460px;
 }
 
 /*14*/
-.news { margin: 10px 0;}
+.news { margin: 20px 20px 50px 20px;}
 .news h1 {
 	height: 40px; 
 	line-height: 40px;
-	font-size: 16px;
+	font-size: 18px;
 }
 .news .sh { color: #999;}
 .news .sh span { margin-right: 5px;}

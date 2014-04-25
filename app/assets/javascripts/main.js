@@ -21,6 +21,7 @@ $(document).ready(function(){
 //article高度
 $(function(){
 	var ch = document.documentElement.clientHeight;
+	var cw = document.documentElement.clientWidth;
 
     $("article").css("min-height",ch);//最外层	
 })

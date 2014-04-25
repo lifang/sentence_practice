@@ -6,11 +6,16 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   <meta property="qc:admins" content="21202471054635677244554116375" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script type="text/javascript">
+	document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+	    WeixinJSBridge.call('hideToolbar');
+	});
+  </script>
 </head>
-
 <body>
-
-<%= yield %>
-
+	<article>
+		<%= yield %>
+	</article>
 </body>
 </html>

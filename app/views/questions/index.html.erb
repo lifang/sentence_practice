@@ -1,0 +1,42 @@
+<script>
+function select(obj)
+{
+    var word = $(obj).text();
+    var answer = $(obj).parents(".ex_con").find(".answer_text").val();
+    answer = answer + " " + word;
+    $(obj).parents(".ex_con").find(".answer_text").val(answer);
+    var text_li = "<li>"+ word + "</li>";
+    $(obj).parents(".ex_con").find(".answer").find("ul").append(text_li);
+}
+</script>
+<section class="exercises">
+	<div class="ex_title">
+    	<div class="timer"><p style="width: 50%;">剩余 30 秒</p></div>
+        <div class="num">2</div>
+    </div>
+    <% @questions.each do |question| %>
+    <div class="ex_con">
+    	<div class="question"><%= question.translation %>。</div>
+        <div class="answer">
+                <ul>
+                </ul>
+        </div>
+        <input type="text" value="" class="answer_text">
+        <input type="text" value="<%= question.original_sentence %>" class="correct_answer">
+        <div class="chooseArea">
+        	<ul>
+                <% question.original_sentence.split(" ").each do |word| %>
+                    <li onclick="select(this)"><%= word %></li>
+                <% end %>
+                <% question.similar_words.split(",").each do |word| %>
+                    <li onclick="select(this)" style="display:none;"><%= word %></li>
+                <% end %>
+            </ul>
+        </div>
+    </div>
+    <% end %>
+</section>
+<section class="btn_box">
+	<a href="#" class="orange_btn s_btn">完成</a>
+    <a href="#" class="gray_btn s_btn">退一步</a>
+</section>

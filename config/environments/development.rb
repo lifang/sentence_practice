@@ -12,7 +12,7 @@ SentencePractice::Application.configure do
   # Show full error reports and disable caching
   config.consider_all_requests_local  = true
   # config.action_view.debug_rjs = true
-  # config.action_controller.perform_caching = false
+  config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false
@@ -28,7 +28,7 @@ SentencePractice::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   config.active_record.auto_explain_threshold_in_seconds = 0.5
-config.session_store(:cookie_store, {:key => foo, :secret => bar})
+  
   # Do not compress assets
   config.assets.compress = false
 
