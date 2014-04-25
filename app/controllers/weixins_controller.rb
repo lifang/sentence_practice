@@ -17,9 +17,11 @@ class WeixinsController < ApplicationController
         content = params[:xml][:Content]
         if content=="试炼"
           #        @message = micro_image_text[0].content if micro_image_text && micro_image_text[0]
-          @message = "&lt;a href='#{MW_URL}' &gt;点击试炼&lt;/a&gt;"
+          @message = "&lt;a href='#{Constant::SERVER_PATH}' &gt;点击试炼&lt;/a&gt;"
           xml = template_xml
           render :xml => xml        #关注 自动回复的文字消息
+        else
+          render :text => "请正确输入！"
         end
       else
         render :text => "ok"
