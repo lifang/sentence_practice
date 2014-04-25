@@ -5,7 +5,7 @@
     </div>
     <% count = 0 %>
     <% @questions.each do |question| %>
-    <div class="ex_con" id="question_<%= count %>">
+    <div class="ex_con" id="question_<%= count %>" <%= (count > 0) ? "style='display:none;'" : "" %>>
     	<div class="question"><%= question.translation %>。</div>
         <div class="answer">
                 <ul>

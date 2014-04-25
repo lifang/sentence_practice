@@ -27,7 +27,7 @@ function select_item(obj)
     //判断选完当前词语后，词语是否全部填写完毕
     if(all_index != "")
     {
-    	alert(all_index);
+    	// alert(all_index);
     	var index_arry = all_index.split(",");
     	var children_length = $(obj).parents("ul").children().last().index();
     }
