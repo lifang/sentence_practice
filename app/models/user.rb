@@ -5,5 +5,5 @@ class User < ActiveRecord::Base
 	has_many :answer_details, :dependent => :destroy
 	FIRST_REWORD_GOLD = 20
 	INIT_COMPLETE_PER_CENT = 0
-	INIT_LEVEL = 0
+	INIT_LEVEL = 1
 end

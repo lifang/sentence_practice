@@ -11,16 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140422071335) do
+ActiveRecord::Schema.define(:version => 20140424024544) do
 
   create_table "answer_details", :force => true do |t|
     t.integer  "question_id"
     t.integer  "answer_times"
     t.integer  "correct_times"
     t.integer  "user_id"
-    t.boolean  "status",        :default => false
+    t.boolean  "first_status",  :default => false
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
+    t.boolean  "second_status", :default => false
   end
 
   add_index "answer_details", ["question_id"], :name => "index_answer_details_on_question_id"
@@ -32,6 +33,7 @@ ActiveRecord::Schema.define(:version => 20140422071335) do
     t.string   "original_sentence"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+    t.string   "similar_words"
   end
 
   create_table "share_records", :force => true do |t|

@@ -1,0 +1,19 @@
+<section class="aboutMe">
+    <h1>我的概况</h1>
+     <ul>
+        <li><label class="grade_icon">等&nbsp;&nbsp;&nbsp;级：</label><span><%= @user.level.present? ? "#{@user.level}级" : "暂无数据" %></span><a href="/users/level_introduction">...</a></li>
+        <li><label class="complete_icon">完成度：</label>
+            <span>
+                <% if @current_level_questions_count.to_i > 0 %>
+                    <%= (@finish_questions_count.to_f/@current_level_questions_count* 100).round(1)  %>
+                <% else %>
+                    暂无题目
+                <% end %>
+            </span></li>
+        <li><label class="gold_icon">金&nbsp;&nbsp;&nbsp;币：</label><span><%= @user.gold.present? ? "#{@user.gold}" : "暂无数据" %></span><a href="/users/promotion">...</a></li>
+     </ul>
+</section>
+<section class="btn_box">
+    <a href="/questions" class="orange_btn">开始试炼</a>
+    <a href="#" class="yellow_btn">关注句子酷</a>
+</section>
