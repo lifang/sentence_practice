@@ -30,7 +30,9 @@ SentencePractice::Application.routes.draw do
   resources :questions do
     collection do
     end   
-  end 
+  end
+
+  match "/weixins/accept_token" => "weixins#accept_token"
   
   # Sample resource route with options:
   #   resources :products do
