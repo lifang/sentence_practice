@@ -36,6 +36,8 @@ ActiveRecord::Schema.define(:version => 20140424024544) do
     t.string   "similar_words"
   end
 
+  add_index "questions", ["level_types"], :name => "index_questions_on_level_types"
+
   create_table "share_records", :force => true do |t|
     t.integer  "user_id"
     t.string   "open_id"
