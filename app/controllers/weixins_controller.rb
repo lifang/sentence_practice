@@ -14,8 +14,15 @@ class WeixinsController < ApplicationController
     tmp_encrypted_str = get_signature(cweb, timestamp, nonce)
     if request.request_method == "POST" && tmp_encrypted_str == signature
       if params[:xml][:MsgType] == "text"   #用户发送文字消息
-        #      content = params[:xml][:Content]
-
+        content = params[:xml][:Content]
+        if content=="试炼"
+          #        @message = micro_image_text[0].content if micro_image_text && micro_image_text[0]
+          @message = "&lt;a href='#{MW_URL + content}&amp;secret_key=#{params[:xml][:FromUserName]}' &gt;点击试炼&lt;/a&gt;"
+          xml = template_xml
+          render :xml => xml        #关注 自动回复的文字消息
+        end
+      else
+        render :text => "ok"
       end
     elsif request.request_method == "GET" && tmp_encrypted_str == signature  #配置服务器token时是get请求
       render :text => tmp_encrypted_str == signature ? echostr :  false
