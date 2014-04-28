@@ -50,15 +50,18 @@ class QuestionsController < ApplicationController
 					@notice = "答错了！"
 				end
 			end
-			if(answer_details.correct_times.to_f / answer_details.answer_times) >= 0.6	
+			answer_details = AnswerDetail.find_by_id answer_details.id
+			if((answer_details.correct_times.to_f / answer_details.answer_times)*100) >= 60
 				if step == "first"
-					if question_result == "true"
-						answer_details.update_attributes(:first_status => AnswerDetail::STATUS[:FINISH])
-					end	
+					# if question_result == "true"
+						answer_details.update_attributes(:first_status => AnswerDetail::STATUS[:FINISH], 
+							:correct_times => 0, :answer_times => 0)
+					# end	
 				elsif step == "second"
-					if question_result == "true"
-						answer_details.update_attributes(:second_status => AnswerDetail::STATUS[:FINISH])
-					end	
+					# if question_result == "true"
+						answer_details.update_attributes(:second_status => AnswerDetail::STATUS[:FINISH],
+							:correct_times => 0, :answer_times => 0)
+					# end	
 				end	
 			end	
 		end	

@@ -1,3 +1,8 @@
+<%if @status.present? %>
+<script>
+    setTimeout('window.location.href="/users";',3000);
+</script>
+<% end %>
 <section class="aboutMe">
     <h1>我的概况</h1>
      <ul>
@@ -14,6 +19,33 @@
      </ul>
 </section>
 <section class="btn_box">
-    <a href="/questions" class="orange_btn">开始试炼</a>
-    <a href="weixin://contacts/profile/gh_26ae912c4b06" class="yellow_btn">关注句子酷</a>
+    <% if @questions.any? %>
+        <% if @question.present? %>
+            <a href="/questions" class="orange_btn">开始试炼</a>
+            <a href="weixin://contacts/profile/gh_26ae912c4b06" class="yellow_btn">关注句子酷</a>
+        <% else %>
+            <%if @status && @status == "false" %>
+                <div class="tooltip"><%= flash[:notice] %><span class="arrow"></span></div>   
+            <% end %>    
+            <a href="javascript:void(0)" class="orange_btn" onclick="unlock_next_level(this)">解锁等级</a>
+        <% end %>
+    <% else %>
+        当前等级暂无题目
+    <% end %>    
 </section>
+
+<% if @status && @status == "true" %>
+<div class="tab" id="success" style="display:none;">
+    <p style="text-align: left;line-height: 24px;margin: 20px 10px;"><%= flash[:notice] %></p>
+</div>
+<script>
+popup("#success");
+setTimeout('hide_success()',3000);
+    function hide_success()
+    {
+        $("#success").empty();
+        $("#success").hide();
+        $("#panel") .hide();
+    }
+</script>
+<% end %>

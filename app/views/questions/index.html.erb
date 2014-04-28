@@ -1,10 +1,11 @@
+<% if @question %>
 <script>
 setInterval('startTime()', 1000);
 </script>
 <section class="exercises">
 	<div class="ex_title">
-    	<div class="timer"><p style="width: 100%;">剩余 60 秒</p><input type="hidden" class="time" value="60"></div>
-        <div class="num">2</div>
+    	<div class="timer"><p style="width: 100%;"></p><input type="hidden" class="time" value="60"></div>
+        <div class="num">60</div>
     </div>
     <div class="ex_con" >
         <%= render "one_que", {:question => @question} %>
@@ -17,7 +18,11 @@ setInterval('startTime()', 1000);
 	<a href="javascript:void(0)" class="gray_btn s_btn" id="finish_btn" >完成</a>
     <a href="javascript:void(0)" class="gray_btn s_btn" id="back_step_btn" >退一步</a>
 </section>
-
+<% else %>
+    <section class="exercises">
+        当前等级下没有可做的题目
+    </section>  
+<% end %>
 
 <div id="result" class="tab" style="display:none;">
 </div>
@@ -30,3 +35,15 @@ setInterval('startTime()', 1000);
     </div>
     <div class="tab_btn"><a href="javascript:void(0)" class="orange_btn" onclick="view_score(this)">查看成绩</a></div>
 </div>    
+
+
+<div id="unlock_level" class="tab" style="display:none;">
+    <div class="tab_title">
+        <h1 class="reply_icon">等级完成</h1>
+    </div>
+    <div class="tab_con">
+        <p>下一级：初级</p>
+        <p>解锁费用：20</p>
+    </div>
+    <div class="tab_btn"><a href="javascript:void(0)" class="orange_btn" onclick="unlock_next_level(this)">解锁等级</a></div>
+</div>
