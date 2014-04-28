@@ -197,12 +197,12 @@ function continue_question(obj)
 	{
 		correct_counts = parseInt(correct_counts) + parseInt(correct);
 		$(".correct_counts").val(correct_counts);
-		alert(correct_counts);
+		// alert(correct_counts);
 	}
 	if(correct == 1 || correct == 0)
 	{
 		var current_question_id = $(".current_question_id").val();
-		alert(current_question_id);
+		// alert(current_question_id);
 		$("[id='"+current_question_id+"']").hide();
 		$("[id='"+current_question_id+"']").next().show();
 		$("[id='"+current_question_id+"']").remove();
