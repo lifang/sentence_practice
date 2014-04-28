@@ -22,8 +22,11 @@
           alert(data);
           alert(window.opener.location.href);
         if(data){
-          (window.opener.location.href.split('?last_url=')[1]==null) ? window.opener.location.reload() : window.opener.location.href = window.opener.location.href.split('?last_url=')[1] ;window.close();
-          window.close();
+          //(window.opener.location.href.split('?last_url=')[1]==null) ? window.opener.location.reload() : window.opener.location.href = window.opener.location.href.split('?last_url=')[1] ;window.close();
+          //(window.opener.location.href.split('/logins/')[1]==null) ? window.opener.location.reload() : window.opener.location.href = window.opener.location.href;window.close();
+          //document.close();
+          document.location.href='http://test.sunworldmedia.com';
+          //window.close();
         }else{
           window.opener.location.reload();
           window.close();
