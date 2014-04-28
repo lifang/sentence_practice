@@ -215,3 +215,23 @@ function continue_question(obj)
 	$(obj).parents(".tab").hide();
 	$("#result").hide();
 }
+
+//倒计时
+function startTime()
+{
+	var time = $(".time").val();
+	time = parseInt(time);
+	if(time > 0)
+	{
+		time = time - 1;
+		$(".time").val(time);
+		var per_cent = (time/60.0)*100;
+		$(".timer").find("p").text("剩余"+time+"秒");
+		$(".timer").find("p").css("width", per_cent+"%");	
+	}	
+}
+
+function check_time()
+{
+	
+}
