@@ -12,7 +12,11 @@ SentencePractice::Application.routes.draw do
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
-  resources :sentences
+  resources :sentences do
+    collection do 
+      get :follow_sentences
+    end  
+  end  
 
   resources :logins do
     collection do
