@@ -22,7 +22,7 @@
     <% if @questions.any? %>
         <% if @question.present? %>
             <a href="/questions" class="orange_btn">开始试炼</a>
-            <a href="javascript:void(0)" class="yellow_btn">关注句子酷</a>
+            <a href="weixin://contacts/profile/gh_26ae912c4b06" class="yellow_btn">关注句子酷</a>
         <% else %>
             <%if @status && @status == "false" %>
                 <div class="tooltip"><%= flash[:notice] %><span class="arrow"></span></div>   
