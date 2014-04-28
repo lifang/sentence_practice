@@ -13,7 +13,7 @@ class LoginsController < ApplicationController
       meters=params[:access_token].split("&")
       access_token=meters[0].split("=")[1]
       expires_in=meters[1].split("=")[1].to_i
-      openid=cookies[:open_id]
+      openid=params[:open_id]
       unless openid
         flash[:share_notice]="网络繁忙，稍后重试"
         throw_error
