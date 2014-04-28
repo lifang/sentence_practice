@@ -40,7 +40,14 @@
 </section>
 <section class="btn_box">
     <input type="hidden" value="" class="current_question_id">
+    <input type="hidden" value="<%= @step %>" class="step">
+    <input type="hidden" value="0" class="correct_counts">
     <input type="hidden" value="question_<%= @questions.last.id %>" class="last_question_id">
 	<a href="javascript:void(0)" class="gray_btn s_btn" id="finish_btn" >完成</a>
     <a href="javascript:void(0)" class="gray_btn s_btn" id="back_step_btn" >退一步</a>
 </section>
+
+
+<div id="result" class="tab" style="display:none;"> 
+</div>
+

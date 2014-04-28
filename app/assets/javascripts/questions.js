@@ -114,19 +114,30 @@ function back_step(obj)
 //检查答案
 function check_answer(obj)
 {
+
+	var last_question_id_str = $(".btn_box").find(".last_question_id").val();
+	var step = $(".btn_box").find(".step").val();
 	var current_question_id = $(obj).parents(".btn_box").find(".current_question_id").val();
 	var correct_answer = $("#"+current_question_id).find(".correct_answer").val();
 	var answer = $("#"+current_question_id).find(".answer_text").val();
 	correct_answer = correct_answer.replace(/\s/g,"");
 	answer = answer.replace(/\s/g,"");
+	$("#finish_btn").removeClass("orange_btn");
+	$("#finish_btn").addClass("gray_btn");
+	$("#finish_btn").removeAttr("onclick");
+	$("#back_step_btn").removeClass("orange_btn");
+	$("#back_step_btn").addClass("gray_btn");
+	$("#back_step_btn").removeAttr("onclick");
 	if(answer == correct_answer)
 	{
 		$.ajax({
 	      async:true,
 	      type: "POST",
 	      url: "/questions/check_answer",
-	      dataType: "json",
+	      dataType: "script",
 	      data : {
+	      	step : step,
+	      	last_question_id_str : last_question_id_str,
 	        question_id_str : current_question_id,
 	        question_result : "true"
 	      },
@@ -136,6 +147,67 @@ function check_answer(obj)
 	}
 	else
 	{
-		alert("答错了!");
+		$.ajax({
+	      async:true,
+	      type: "POST",
+	      url: "/questions/check_answer",
+	      dataType: "script",
+	      data : {
+	      	step : step,
+	      	last_question_id_str : last_question_id_str,
+	        question_id_str : current_question_id,
+	        question_result : "false"
+	      },
+	      success: function(data){
+	      }
+	    });
 	}
+}
+
+//
+function popup(div_id)
+{
+
+	var windows_height = $(window).height();
+	var windows_width = $(window).width();
+	$("#panel").height(windows_height);
+	$("#panel").width(windows_width);
+	var div_height = $(div_id).height();
+	var div_width = $(div_id).width();
+	var top = (windows_height - div_height)/2;
+	var left = (windows_width - div_width)/2;	
+	$(div_id).css("top", top);
+	$(div_id).css("left", left);
+	$(div_id).css("z-index", 100);
+	$(div_id).show();
+	var div_obj = $(div_id);
+	$("#panel").append(div_obj);
+	$("#panel").show();
+}
+
+function continue_question(obj)
+{
+	var correct = $(obj).parents(".tab").find(".status").val();
+	var correct_counts = $(".correct_counts").val();
+	if(correct_counts == "" && correct == 1)
+	{
+		$(".correct_counts").val(correct);
+	}
+	else
+	{
+		correct_counts = parseInt(correct_counts) + parseInt(correct);
+		$(".correct_counts").val(correct_counts);
+		alert(correct_counts);
+	}
+	if(correct == 1 || correct == 0)
+	{
+		var current_question_id = $(".current_question_id").val();
+		alert(current_question_id);
+		$("[id='"+current_question_id+"']").hide();
+		$("[id='"+current_question_id+"']").next().show();
+		$("[id='"+current_question_id+"']").remove();
+	}
+	$(obj).parents(".tab").empty();
+	$(obj).parents(".tab").hide();
+	$("#result").hide();
 }
