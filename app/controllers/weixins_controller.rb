@@ -6,8 +6,6 @@ class WeixinsController < ApplicationController
   require 'openssl'
   require "open-uri"
   require "tempfile"
-
-
   #用于处理相应服务号的请求以及
   def accept_token
     signature, timestamp, nonce, echostr, cweb = params[:signature], params[:timestamp], params[:nonce], params[:echostr], params[:cweb]
@@ -18,7 +16,7 @@ class WeixinsController < ApplicationController
         if content=="试炼"
           #        @message = micro_image_text[0].content if micro_image_text && micro_image_text[0]
           @message = "&lt;a href='#{Constant::SERVER_PATH}' &gt;点击试炼&lt;/a&gt;"
-          xml = template_xml
+          xml = teplate_xml
           render :xml => xml        #关注 自动回复的文字消息
         else
           render :text => "请正确输入！"
