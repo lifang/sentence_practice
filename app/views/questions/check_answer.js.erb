@@ -1,0 +1,7 @@
+<% if @status == true %>
+    $("#result").html('<%=j render 'result' %>');
+    popup("#result");
+<% elsif @status == false %>
+    $("#result").html('<%=j render 'result' %>');
+    popup("#result");
+<% end %>

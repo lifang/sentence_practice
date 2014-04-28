@@ -3,34 +3,49 @@
     	<div class="timer"><p style="width: 50%;">剩余 30 秒</p></div>
         <div class="num">2</div>
     </div>
-    <% count = 0 %>
-    <% @questions.each do |question| %>
-    <div class="ex_con" id="question_<%= count %>" <%= (count > 0) ? "style='display:none;'" : "" %>>
-    	<div class="question"><%= question.translation %>。</div>
+    <div class="ex_con" id="question_<%= question.id %>" <%= (count > 0) ? "style='display:none;'" : "" %>>
+    	<div class="question"><%= question.translation %></div>
         <div class="answer">
                 <ul>
                     <li></li>
                 </ul>
         </div>
-        <input type="text" value="" class="answer_text">
-        <input type="text" value="" class="index_order">
-        <input type="text" value="<%= question.original_sentence %>" class="correct_answer">
+        <input type="hidden" value="<%= question.original_sentence %>" class="correct_answer">
         <div class="chooseArea">
-        	<ul>
-                <% question.original_sentence.split(" ").each do |word| %>
-                    <li onclick="select_item(this)"><%= word %></li>
+        	<ul><% words_count = question.original_sentence.split(" ").length %>
+                <% sentences = [] %>
+                <% if @step == "first" %>
+                    <% sentences =  question.original_sentence.split(" ") %>
+                <% elsif @step == "second" %>    
+                    <% arr_1 =  question.original_sentence.split(" ").to_a %>
+                    <% arr_2 = question.similar_words.split(",").to_a %>
+                    <% sentences = arr_1.concat(arr_2) %>
                 <% end %>
-                <% question.similar_words.split(",").each do |word| %>
-                    <li onclick="select_item(this)" style="display:none;"><%= word %></li>
+                <% raddom_number = [] %>
+                <% (0..sentences.length-1).each{|i| raddom_number << i } %>
+                <% raddom_number.shuffle.each do |i| %>
+                    <%= load_select_item sentences[i] %>
                 <% end %>
+                
             </ul>
         </div>
+        <input type="hidden" value="" class="answer_text">
+        <input type="hidden" value="" class="index_order">
+        <input type="hidden" value="<%= words_count %>" class="word_number">
     </div>
     <% count += 1 %>
     <% end %>
 </section>
 <section class="btn_box">
-    <input type="text" value="" class="current_question_id">
-	<a href="javascript:void(0)" class="orange_btn s_btn">完成</a>
-    <a href="javascript:void(0)" class="gray_btn s_btn" onclick="back_step(this)">退一步</a>
+    <input type="hidden" value="" class="current_question_id">
+    <input type="hidden" value="<%= @step %>" class="step">
+    <input type="hidden" value="0" class="correct_counts">
+    <input type="hidden" value="question_<%= @questions.last.id %>" class="last_question_id">
+	<a href="javascript:void(0)" class="gray_btn s_btn" id="finish_btn" >完成</a>
+    <a href="javascript:void(0)" class="gray_btn s_btn" id="back_step_btn" >退一步</a>
 </section>
+
+
+<div id="result" class="tab" style="display:none;"> 
+</div>
+
