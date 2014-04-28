@@ -14,8 +14,7 @@ class WeixinsController < ApplicationController
       if params[:xml][:MsgType] == "text"   #用户发送文字消息
         content = params[:xml][:Content]
         if content=="试炼"
-          #        @message = micro_image_text[0].content if micro_image_text && micro_image_text[0]
-          @message = "&lt;a href='#{Constant::SERVER_PATH}' &gt;点击试炼&lt;/a&gt;"
+          @message = "&lt;a href='#{Constant::SERVER_PATH}?open_id=#{params[:xml][:FromUserName]}' &gt;点击试炼&lt;/a&gt;"
           xml = teplate_xml
           render :xml => xml        #关注 自动回复的文字消息
         else
