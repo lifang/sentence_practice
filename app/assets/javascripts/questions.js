@@ -47,79 +47,74 @@ function select_item(obj)
 //做题时后退一步
 function back_step(obj)
 {
-	var current_question_id = $(obj).parents(".btn_box").find(".current_question_id").val();
-	if(current_question_id != "")
-	{
-		var index_order = $("#"+current_question_id).find(".index_order").val();
-		if(index_order != "")
+	var question_div = $(obj).parent().prev().find(".ex_con");
+	var index_order = $(question_div).find(".index_order").val();
+	if(index_order != "")
+	{	
+		var li_last = $(question_div).find(".answer").find("ul").children().last();
+		if($(li_last).index() != 0)
 		{	
-			var li_last = $("#"+current_question_id).find(".answer").find("ul").children().last();
-			if($(li_last).index() != 0)
-			{	
-				var last_index = index_order.lastIndexOf(",");
-				if(last_index < 0 && index_order != "") 	
-				{
-					var resume_index = index_order;
-					var resume_li = $("#"+current_question_id).find(".chooseArea").find("ul").find("li:eq("+ resume_index +")");
-					$(resume_li).attr("onclick","select_item(this)");
-					$(resume_li).removeAttr("style");
-					$("#"+current_question_id).find(".index_order").val("");
-					$("#"+current_question_id).find(".answer_text").val("");
-				}
-				else if(last_index >= 0)
-				{
-					var resume_index = index_order.substr(last_index+1);
-					var resume_li = $("#"+current_question_id).find(".chooseArea").find("ul").find("li:eq("+ resume_index +")");
-					$(resume_li).attr("onclick","select_item(this)");
-					$(resume_li).removeAttr("style");
-					$(resume_li).css("cursor","pointer");
-					var index_order = index_order.substring(0,last_index);
-					$("#"+current_question_id).find(".index_order").val(index_order);
-					var answer_text = $("#"+current_question_id).find(".answer_text");
-					var last_place_index = $(answer_text).val().lastIndexOf(" ");
-					var answer = $(answer_text).val();
-					if(last_place_index > 0 && answer != "")
-					{
-						answer = answer.substring(0,last_place_index);
-						$(answer_text).val(answer);	
-					}
-					
-				}
-				$(li_last).remove();
-				var index_order = $("#"+current_question_id).find(".index_order").val();
-				if(index_order == "")
-				{
-					$("#back_step_btn").removeAttr("onclick");
-					$("#back_step_btn").removeClass("orange_btn");
-					$("#back_step_btn").addClass("gray_btn");
-				}
-				else
-				{
-					var index_arr = index_order.split(",");
-					var index_arr_length = index_arr.length;
-					var children_length = $("#"+current_question_id).find(".word_number").val();
-					if(index_arr_length < children_length)
-					{
-						$("#finish_btn").removeClass("orange_btn");
-    					$("#finish_btn").addClass("gray_btn");
-    					$("#finish_btn").removeAttr("onclick");	
-					}
-				}	
+			var last_index = index_order.lastIndexOf(",");
+			if(last_index < 0 && index_order != "") 	
+			{
+				var resume_index = index_order;
+				var resume_li = $(question_div).find(".chooseArea").find("ul").find("li:eq("+ resume_index +")");
+				$(resume_li).attr("onclick","select_item(this)");
+				$(resume_li).removeAttr("style");
+				$(question_div).find(".index_order").val("");
+				$(question_div).find(".answer_text").val("");
 			}
-			
+			else if(last_index >= 0)
+			{
+				var resume_index = index_order.substr(last_index+1);
+				var resume_li = $(question_div).find(".chooseArea").find("ul").find("li:eq("+ resume_index +")");
+				$(resume_li).attr("onclick","select_item(this)");
+				$(resume_li).removeAttr("style");
+				$(resume_li).css("cursor","pointer");
+				var index_order = index_order.substring(0,last_index);
+				$(question_div).find(".index_order").val(index_order);
+				var answer_text = $(question_div).find(".answer_text");
+				var last_place_index = $(answer_text).val().lastIndexOf(" ");
+				var answer = $(answer_text).val();
+				if(last_place_index > 0 && answer != "")
+				{
+					answer = answer.substring(0,last_place_index);
+					$(answer_text).val(answer);	
+				}
+				
+			}
+			$(li_last).remove();
+			var index_order = $(question_div).find(".index_order").val();
+			if(index_order == "")
+			{
+				$("#back_step_btn").removeAttr("onclick");
+				$("#back_step_btn").removeClass("orange_btn");
+				$("#back_step_btn").addClass("gray_btn");
+			}
+			else
+			{
+				var index_arr = index_order.split(",");
+				var index_arr_length = index_arr.length;
+				var children_length = $(question_div).find(".word_number").val();
+				if(index_arr_length < children_length)
+				{
+					$("#finish_btn").removeClass("orange_btn");
+					$("#finish_btn").addClass("gray_btn");
+					$("#finish_btn").removeAttr("onclick");	
+				}
+			}	
 		}
+		
 	}	
 }
 
 //检查答案
 function check_answer(obj)
 {
-
-	var last_question_id_str = $(".btn_box").find(".last_question_id").val();
 	var step = $(".btn_box").find(".step").val();
-	var current_question_id = $(obj).parents(".btn_box").find(".current_question_id").val();
-	var correct_answer = $("#"+current_question_id).find(".correct_answer").val();
-	var answer = $("#"+current_question_id).find(".answer_text").val();
+	var question_id = $(obj).parent().prev().find(".question_id").val();
+	var correct_answer = $(obj).parent().prev().find(".correct_answer").val();
+	var answer = $(obj).parent().prev().find(".answer_text").val();
 	correct_answer = correct_answer.replace(/\s/g,"");
 	answer = answer.replace(/\s/g,"");
 	$("#finish_btn").removeClass("orange_btn");
@@ -137,8 +132,7 @@ function check_answer(obj)
 	      dataType: "script",
 	      data : {
 	      	step : step,
-	      	last_question_id_str : last_question_id_str,
-	        question_id_str : current_question_id,
+	        question_id : question_id,
 	        question_result : "true"
 	      },
 	      success: function(data){
@@ -154,8 +148,7 @@ function check_answer(obj)
 	      dataType: "script",
 	      data : {
 	      	step : step,
-	      	last_question_id_str : last_question_id_str,
-	        question_id_str : current_question_id,
+	        question_id : question_id,
 	        question_result : "false"
 	      },
 	      success: function(data){
@@ -201,11 +194,22 @@ function continue_question(obj)
 	}
 	if(correct == 1 || correct == 0)
 	{
-		var current_question_id = $(".current_question_id").val();
-		// alert(current_question_id);
-		$("[id='"+current_question_id+"']").hide();
-		$("[id='"+current_question_id+"']").next().show();
-		$("[id='"+current_question_id+"']").remove();
+		var question_id = $(".question_id").val();
+		var step = $(".step").val();
+		$.ajax({
+	      async:true,
+	      type: "GET",
+	      url: "/questions/get_next_question",
+	      dataType: "script",
+	      data : {
+	      	step : step,
+	        question_id : question_id,
+	        question_result : "false"
+	      },
+	      success: function(data){
+	      }
+	    });
+
 	}
 	$(obj).parents(".tab").empty();
 	$(obj).parents(".tab").hide();

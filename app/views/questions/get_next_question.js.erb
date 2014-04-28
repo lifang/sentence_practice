@@ -1,0 +1,3 @@
+<% if @question.present? %>
+	$(".ex_con").html('<%=j(render "one_que", {:question => @question})%>');
+<% end %>

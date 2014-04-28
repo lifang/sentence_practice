@@ -18,9 +18,9 @@ class LoginsController < ApplicationController
         flash[:share_notice]="网络繁忙，稍后重试"
         throw_error
       end
-      @user= User.find_by_open_id(openid)
+      @user= User.find_by_uniq_id(openid)
       if @user.nil?
-      	@user = User.create(:level => User::INIT_LEVEL, :complete_per_cent => User::INIT_COMPLETE_PER_CENT, :gold => User::FIRST_REWORD_GOLD, :open_id => openid)
+      	@user = User.create(:level => User::INIT_LEVEL, :complete_per_cent => User::INIT_COMPLETE_PER_CENT, :gold => User::FIRST_REWORD_GOLD, :uniq_id => openid)
         cookies[:user_id] = @user.id
       else
       	cookies[:user_id] = @user.id

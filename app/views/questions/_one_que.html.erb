@@ -4,9 +4,10 @@
             <li></li>
         </ul>
 </div>
+<input type="hidden" value="<%= question.id %>" class="question_id">
 <input type="hidden" value="<%= question.original_sentence %>" class="correct_answer">
 <div class="chooseArea">
-	<ul><% words_count = question.original_sentence.split(" ").length %>
+    <ul><% words_count = question.original_sentence.split(" ").length %>
         <% sentences = [] %>
         <% if @step == "first" %>
             <% sentences =  question.original_sentence.split(" ") %>
@@ -20,7 +21,6 @@
         <% raddom_number.shuffle.each do |i| %>
             <%= load_select_item sentences[i] %>
         <% end %>
-        
     </ul>
 </div>
 <input type="hidden" value="" class="answer_text">

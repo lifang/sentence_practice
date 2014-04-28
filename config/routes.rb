@@ -30,6 +30,7 @@ SentencePractice::Application.routes.draw do
   resources :questions do
     collection do
       post :check_answer
+      get :get_next_question
     end   
   end
 
