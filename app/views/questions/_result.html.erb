@@ -3,5 +3,8 @@
         <%= @notice %>
     </div>
     <input type="hidden" class="status" value="<%= @status == true ? 1 : 0 %>" >
+    <p style="text-align: left;line-height: 24px;margin: 20px 0;">翻译:<%= @question.translation %></p>
+    <p style="text-align: left;line-height: 24px;">原句:<%= @question.original_sentence %></p>
+
 </div>
 <div class="tab_btn"><a href="javascript:void(0)" class="orange_btn" onclick="continue_question(this)">继续</a></div>

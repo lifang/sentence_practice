@@ -22,10 +22,11 @@ function select_item(obj)
 		$(obj).parents(".ex_con").find(".index_order").val(index_order+","+index);
 	}
     $(obj).css("background-color","#eee");
+    $(obj).css("color","#ccc");
     $(obj).removeAttr("onclick");
     var question_id = $(obj).parents(".ex_con").attr("id");
     $(".btn_box").find(".current_question_id").val(question_id);
-    var text_li = "<li>"+ word + "</li>";
+    var text_li = "<li>"+ word + "</li>&nbsp;";
     $(obj).parents(".ex_con").find(".answer").find("ul").append(text_li);
     var all_index = $(obj).parents(".ex_con").find(".index_order").val();
     //判断选完当前词语后，词语是否全部填写完毕
@@ -160,7 +161,7 @@ function check_answer(obj)
 //
 function popup(div_id)
 {
-
+	// $("#panel").empty();
 	var windows_height = $(window).height();
 	var windows_width = $(window).width();
 	$("#panel").height(windows_height);
@@ -173,8 +174,8 @@ function popup(div_id)
 	$(div_id).css("left", left);
 	$(div_id).css("z-index", 100);
 	$(div_id).show();
-	var div_obj = $(div_id);
-	$("#panel").append(div_obj);
+	// var div_obj = $(div_id);
+	// $("#panel").append(div_obj);
 	$("#panel").show();
 }
 
@@ -204,7 +205,6 @@ function continue_question(obj)
 	      data : {
 	      	step : step,
 	        question_id : question_id,
-	        question_result : "false"
 	      },
 	      success: function(data){
 	      }
@@ -213,6 +213,7 @@ function continue_question(obj)
 	}
 	$(obj).parents(".tab").empty();
 	$(obj).parents(".tab").hide();
+	$("#panel").hide();
 	$("#result").hide();
 }
 
@@ -221,22 +222,53 @@ function startTime()
 {
 	var time = $(".time").val();
 	time = parseInt(time);
-	if(time > 0)
+	var unlock_level_display =  $("#unlock_level").css("display");
+	if(unlock_level_display == "none")
 	{
-		time = time - 1;
-		$(".time").val(time);
-		var per_cent = (time/60.0)*100;
-		$(".timer").find("p").text("剩余"+time+"秒");
-		$(".timer").find("p").css("width", per_cent+"%");	
+		if(time > 0)
+		{
+			time = time - 1;
+			$(".time").val(time);
+			var per_cent = (time/60.0)*100;
+			// $(".timer").find("p").text("剩余"+time+"秒");
+			$(".timer").find("p").css("width", per_cent+"%");
+			$(".num").text(time);
+		}	
+		else
+		{
+			$(".tab").hide();
+			popup("#time_limit");
+		}
 	}	
-	else
-	{
-		$("#time_limit").show();
-	}
 }
 
 function view_score(obj)
 {
 	var correct_counts = $(".correct_counts").val();
-	
+	$.ajax({
+	      async:true,
+	      type: "POST",
+	      url: "/users/calculate_score",
+	      dataType: "script",
+	      data : {
+	      	correct_counts : correct_counts
+	      },
+	      success: function(data){
+	      }
+    });
+}
+
+function unlock_next_level(obj)
+{
+	$.ajax({
+	      async:true,
+	      type: "POST",
+	      url: "/users/unlock_next_level",
+	      dataType: "script",
+	      data : {
+	      	
+	      },
+	      success: function(data){
+	      }
+    });		
 }
