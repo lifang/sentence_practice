@@ -24,6 +24,9 @@ class LoginsController < ApplicationController
         cookies[:user_id] = @user.id
       else
       	cookies[:user_id] = @user.id
+        if @user.open_id.nil?
+          @user.update_attributes(:open_id=> cookies[:open_id])
+        end
       end
       data=true
     rescue
