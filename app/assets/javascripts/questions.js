@@ -229,9 +229,14 @@ function startTime()
 		$(".timer").find("p").text("剩余"+time+"秒");
 		$(".timer").find("p").css("width", per_cent+"%");	
 	}	
+	else
+	{
+		$("#time_limit").show();
+	}
 }
 
-function check_time()
+function view_score(obj)
 {
+	var correct_counts = $(".correct_counts").val();
 	
 }

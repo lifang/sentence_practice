@@ -1,6 +1,5 @@
 <script>
-setTimeout('startTime()', 500);
-setTimeout('checkTime()', 1000*60);
+setInterval('startTime()', 1000);
 </script>
 <section class="exercises">
 	<div class="ex_title">
@@ -23,3 +22,11 @@ setTimeout('checkTime()', 1000*60);
 <div id="result" class="tab" style="display:none;">
 </div>
 
+<div id="time_limit" class="tab" style="display:none;">
+    <div class="tab_con">
+        <div class="false">
+            时间到了。
+        </div>
+    </div>
+    <div class="tab_btn"><a href="javascript:void(0)" class="orange_btn" onclick="view_score(this)">查看成绩</a></div>
+</div>    

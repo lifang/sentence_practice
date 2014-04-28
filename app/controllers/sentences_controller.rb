@@ -7,9 +7,7 @@ class SentencesController < ApplicationController
 		if user_id.present?
 			@user = User.find_by_id user_id.to_i
 			if @user.present?
-				redirect_to :controller => :users, :action => :index
-			else
-				redirect_to root_path		
+				redirect_to :controller => :users, :action => :index	
 			end	
 		end	
 	end	
