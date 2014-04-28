@@ -1,6 +1,5 @@
 <script>
   var access_token = window.location.hash.substring(1);;
-  alert(access_token);
   var path = "https://graph.qq.com/oauth2.0/me?";
   var queryParams = [access_token, 'callback=callback'];
   var query = queryParams.join('&');
@@ -19,8 +18,6 @@
         access_token:access_token
       },
       success: function(data){
-        alert(data);
-        alert(window.opener.location.href);
         if(data){
           document.body.removeChild(script);
           //(window.opener.location.href.split('?last_url=')[1]==null) ? window.opener.location.reload() : window.opener.location.href = window.opener.location.href.split('?last_url=')[1] ;window.close();
