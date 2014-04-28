@@ -13,9 +13,9 @@ class QuestionsController < ApplicationController
 		end
 		answer_details_id = answer_details.map(&:question_id)
 		if answer_details_id.any?
-			@questions = Question.where(["level_types = ? and id not in (?)", @user.level, answer_details_id]).order("Rand()").limit(5)
+			@question = Question.where(["level_types = ? and id not in (?)", @user.level, answer_details_id]).order("Rand()").limit(5)
 		else
-			@questions = Question.where(["level_types = ?", @user.level]).order("Rand()").limit(5)	
+			@question = Question.where(["level_types = ?", @user.level]).order("Rand()").limit(1)	
 		end	
 	end
 
