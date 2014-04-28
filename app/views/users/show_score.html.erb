@@ -1,0 +1,47 @@
+<% if @correct_counts >= 5 %>
+<section class="practice">
+    <h1>试炼成功</h1>
+     <ul>
+        <li><label class="reply_icon">答&nbsp;&nbsp;&nbsp;对：</label><span><%= @correct_counts %>题</span></li>
+        <li><label class="complete_icon">完成度：</label>
+            <span>
+                <% if @current_level_questions_count.to_i > 0 %>
+                        <%= (@finish_questions_count.to_f/@current_level_questions_count* 100).round(1)  %>
+                    <% else %>
+                        暂无数据
+                    <% end %>
+            </span>
+        </li>
+        <li><label class="gold_icon">金&nbsp;&nbsp;&nbsp;币：</label>
+            <span>
+                <% if @correct_counts == 5 %>
+                    +1
+                <% elsif @correct_counts > 5 %>    
+                    +2
+                <% end %>
+            </span>
+        </li>
+     </ul>
+</section>
+<% else %>
+    <section class="practice">
+        <h1 class="loser">试炼失败</h1>
+         <ul>
+            <li><label class="reply_icon">答&nbsp;&nbsp;&nbsp;对：</label><span><%= @correct_counts %>题</span></li>
+            <li><label class="complete_icon">完成度：</label>
+                <span>
+                    <% if @current_level_questions_count.to_i > 0 %>
+                        <%= (@finish_questions_count.to_f/@current_level_questions_count* 100).round(1)  %>
+                    <% else %>
+                        暂无数据
+                    <% end %>
+                </span>
+            </li>
+            <li><label class="gold_icon">金&nbsp;&nbsp;&nbsp;币：</label><span>-1</span></li>
+         </ul>  
+    </section>
+<% end %>
+<section class="btn_box">
+    <a href="/questions" class="orange_btn">新的试炼</a>
+    <a href="/users" class="yellow_btn">我的概况</a>
+</section>

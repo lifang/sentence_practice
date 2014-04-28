@@ -1,3 +1,6 @@
 <% if @question.present? %>
 	$(".ex_con").html('<%=j(render "one_que", {:question => @question})%>');
+	$(".step").val('<%= @step %>');
+<% else %>
+	popup("#unlock_level");
 <% end %>
