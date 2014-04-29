@@ -1,3 +1,4 @@
+<% level_name = @step == "first" ? "简单" : "进阶" %>
 <% if @correct_counts >= 5 %>
 <section class="practice">
     <h1>试炼成功</h1>
@@ -6,10 +7,10 @@
         <li><label class="complete_icon">完成度：</label>
             <span>
                 <% if @current_level_questions_count.to_i > 0 %>
-                        <%= (@finish_questions_count.to_f/@current_level_questions_count* 100).round(1)  %>
-                    <% else %>
-                        暂无数据
-                    <% end %>
+                    <%= (@finish_questions_count.to_f/@current_level_questions_count* 100).round(1)  %>
+                <% else %>
+                    暂无数据
+                <% end %>
             </span>
         </li>
         <li><label class="gold_icon">金&nbsp;&nbsp;&nbsp;币：</label>

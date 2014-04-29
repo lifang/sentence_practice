@@ -1,6 +1,17 @@
 <% if @question.present? %>
 	$(".ex_con").html('<%=j(render "one_que", {:question => @question})%>');
-	$(".step").val('<%= @step %>');
+	var old_step = $(".step").val();
+	var new_step = "<%= @step %>";
+	if(old_step == new_step)
+	{
+		$(".step").val('<%= @step %>');		
+	}
+	else
+	{
+		popup("#next_period");
+		$(".step").val('<%= @step %>');
+	}
+	
 <% else %>
 	$(".level_name").text("下一级：<%= @level_name %>");
 	$(".reduce_gold_number").text("解锁费用：<%= @recduce_gold %>");
