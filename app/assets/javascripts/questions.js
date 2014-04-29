@@ -26,7 +26,7 @@ function select_item(obj)
     $(obj).removeAttr("onclick");
     var question_id = $(obj).parents(".ex_con").attr("id");
     $(".btn_box").find(".current_question_id").val(question_id);
-    var text_li = "<li>"+ word + "</li>&nbsp;";
+    var text_li = "<li style='margin:0 3px;'>"+ word + "</li>";
     $(obj).parents(".ex_con").find(".answer").find("ul").append(text_li);
     var all_index = $(obj).parents(".ex_con").find(".index_order").val();
     //判断选完当前词语后，词语是否全部填写完毕
