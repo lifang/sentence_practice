@@ -76,15 +76,18 @@ class UsersController < ApplicationController
 	def unlock_next_level
 		user_id = cookies[:user_id]
 		user = User.find_by_id user_id
-		correct_counts = params[:correct_counts].to_i
+		correct_counts = params[:correct_counts]
 		if user
-			if correct_counts < 5
-				user.update_attributes(:gold => (user.gold-1))
-			elsif correct_counts == 5
-				user.update_attributes(:gold => (user.gold+1))
-			elsif correct_counts > 5
-				user.update_attributes(:gold => (user.gold+2))	
-			end
+			if correct_counts.present?
+				correct_counts = correct_counts.to_i
+				if correct_counts < 5
+					user.update_attributes(:gold => (user.gold-1))
+				elsif correct_counts == 5
+					user.update_attributes(:gold => (user.gold+1))
+				elsif correct_counts > 5
+					user.update_attributes(:gold => (user.gold+2))	
+				end
+			end	
 			info = Question.get_next_question user
 			@question = info[:question]
 			@step = info[:step]
