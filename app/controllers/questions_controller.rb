@@ -24,6 +24,7 @@ class QuestionsController < ApplicationController
 				when Question::LEVEL_TYPE[:FOUR] then @recduce_gold = 100
 				when Question::LEVEL_TYPE[:SIX] then @recduce_gold = 100				
 			end
+			@level_name = Question::LEVEL_NAME[@user.level+1]
 			info = Question.get_next_question @user
 			@question = info[:question]
 			@step = info[:step]
