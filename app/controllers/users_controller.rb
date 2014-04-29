@@ -40,7 +40,9 @@ class UsersController < ApplicationController
 		@correct_counts = correct_counts.to_i
 		if user
 			if @correct_counts < 5
-				user.update_attributes(:gold => (user.gold-1))
+				if user.gold > 0
+					user.update_attributes(:gold => (user.gold-1))
+				end	
 			elsif @correct_counts == 5
 				user.update_attributes(:gold => (user.gold+1))
 			elsif @correct_counts > 5
@@ -81,7 +83,9 @@ class UsersController < ApplicationController
 			if correct_counts.present?
 				correct_counts = correct_counts.to_i
 				if correct_counts < 5
-					user.update_attributes(:gold => (user.gold-1))
+					if user.gold > 0
+						user.update_attributes(:gold => (user.gold-1))
+					end	
 				elsif correct_counts == 5
 					user.update_attributes(:gold => (user.gold+1))
 				elsif correct_counts > 5
