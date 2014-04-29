@@ -60,21 +60,37 @@ class UsersController < ApplicationController
 	def unlock_next_level
 		user_id = cookies[:user_id]
 		user = User.find_by_id user_id
+		correct_counts = params[:correct_counts].to_i
 		if user
-			if user.gold >= 20
-				info = Question.get_next_question user
-				@question = info[:question]
-				@step = info[:step]
-				if !@question.present?
+			if correct_counts < 5
+				user.update_attributes(:gold => (user.gold-1))
+			elsif correct_counts == 5
+				user.update_attributes(:gold => (user.gold+1))
+			elsif correct_counts > 5
+				user.update_attributes(:gold => (user.gold+2))	
+			end
+			info = Question.get_next_question user
+			@question = info[:question]
+			@step = info[:step]
+			recduce_gold = 0
+			if !@question.present?	
+				case user.level
+					when Question::LEVEL_TYPE[:START] then recduce_gold = 20
+					when Question::LEVEL_TYPE[:PRIMARY] then recduce_gold = 50
+					when Question::LEVEL_TYPE[:EXAMINATION] then recduce_gold = 100
+					when Question::LEVEL_TYPE[:ENTRANCE] then recduce_gold = 50
+					when Question::LEVEL_TYPE[:FOUR] then recduce_gold = 100
+					when Question::LEVEL_TYPE[:SIX] then recduce_gold = 100				
+				end			
+				if user.gold >= recduce_gold 
 					@status = true
 					flash[:notice] = "解锁成功，恭喜您升入新等级！"
-					user.update_attributes(:level => (user.level+1), :gold => (user.gold-20))
-				end
-			else
-				@status = false
-				flash[:notice] = "您的金币不足，无法解锁新等级！"
-			end	
-		end	
-		p @status
+					user.update_attributes(:level => (user.level+1), :gold => (user.gold-recduce_gold))	
+				else
+					@status = false
+					flash[:notice] = "您的金币不足，无法解锁新等级！"
+				end	
+			end
+		end
 	end		
 end

@@ -2,5 +2,6 @@
 	$(".ex_con").html('<%=j(render "one_que", {:question => @question})%>');
 	$(".step").val('<%= @step %>');
 <% else %>
+	$(".reduce_gold_number").text("解锁费用：<%= @recduce_gold %>");
 	popup("#unlock_level");
 <% end %>

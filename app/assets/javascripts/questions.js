@@ -260,13 +260,14 @@ function view_score(obj)
 
 function unlock_next_level(obj)
 {
+	var correct_counts = $(".correct_counts").val();
 	$.ajax({
 	      async:true,
 	      type: "POST",
 	      url: "/users/unlock_next_level",
 	      dataType: "script",
 	      data : {
-	      	
+	     	correct_counts : correct_counts	
 	      },
 	      success: function(data){
 	      }

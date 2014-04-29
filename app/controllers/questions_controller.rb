@@ -15,6 +15,15 @@ class QuestionsController < ApplicationController
 		user_id = cookies[:user_id]
 		@user = User.find_by_id user_id
 		if @user
+			@recduce_gold = 0
+			case @user.level
+				when Question::LEVEL_TYPE[:START] then @recduce_gold = 20
+				when Question::LEVEL_TYPE[:PRIMARY] then @recduce_gold = 50
+				when Question::LEVEL_TYPE[:EXAMINATION] then @recduce_gold = 100
+				when Question::LEVEL_TYPE[:ENTRANCE] then @recduce_gold = 50
+				when Question::LEVEL_TYPE[:FOUR] then @recduce_gold = 100
+				when Question::LEVEL_TYPE[:SIX] then @recduce_gold = 100				
+			end
 			info = Question.get_next_question @user
 			@question = info[:question]
 			@step = info[:step]
