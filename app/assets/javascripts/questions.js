@@ -164,8 +164,10 @@ function popup(div_id)
 	// $("#panel").empty();
 	var windows_height = $(window).height();
 	var windows_width = $(window).width();
+	var doc_height = $(document).height();
+	
 	$("#panel").height(windows_height);
-	$("#panel").width(windows_width);
+	$("#panel").width(doc_height);
 	var div_height = $(div_id).height();
 	var div_width = $(div_id).width();
 	var top = (windows_height - div_height)/2;
