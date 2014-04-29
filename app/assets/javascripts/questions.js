@@ -229,7 +229,7 @@ function startTime()
 		{
 			time = time - 1;
 			$(".time").val(time);
-			var per_cent = (time/60.0)*100;
+			var per_cent = (time/180.0)*100;
 			// $(".timer").find("p").text("剩余"+time+"秒");
 			$(".timer").find("p").css("width", per_cent+"%");
 			$(".num").text(time);
