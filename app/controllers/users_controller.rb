@@ -117,4 +117,28 @@ class UsersController < ApplicationController
 			end
 		end
 	end		
+
+	def share
+		share_open_id = params[:share_open_id]
+		user_id = cookies[:user_id]
+		user = User.find_by_id user_id
+		if share_open_id.present? 
+			if !user.present?
+				cookies[:share_open_id] = share_open_id
+				redirect_to :action => :share
+			else
+				if user.open_id != share_open_id
+					cookies[:share_open_id] = share_open_id
+					cookies[:user_id] = nil
+					redirect_to :action => :share
+				else
+						
+				end	
+			end	
+		else
+			if user.present?
+				redirect_to :share_open_id => user.open_id	
+			end
+		end
+	end	
 end

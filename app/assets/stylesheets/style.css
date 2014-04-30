@@ -117,14 +117,14 @@ article:after{
 
 .tab_con { margin: 20px 0; overflow: hidden;}
 .tab_con p { line-height: 24px; text-align: center;}
-.tab .true, .tab .false { 
+.tab .true, .tab .false, .tab .time { 
 	width: 260px; 
 	padding-top: 100px; 
 	text-align: center;
 }
 .tab .true { background: url(/assets/smile.png) no-repeat center top;}
 .tab .false { background: url(/assets/cry.png) no-repeat center top;}
-.tab .false { background: url(/assets/time.png) no-repeat center top;}
+.tab .time { background: url(/assets/time.png) no-repeat center top;}
 .tab_btn { text-align: center;}
 .tab_btn a.orange_btn { width: 120px; display: inline-block;}
 
