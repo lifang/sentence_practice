@@ -8,6 +8,19 @@ class QuestionsController < ApplicationController
 			info = Question.get_next_question @user
 			@question = info[:question]
 			@step = info[:step]
+			if @user.level == Question::LEVEL_TYPE[:START]
+				#奖励分享用户的金币
+				answer_details = AnswerDetail.where(["user_id = ?", @user.id])
+				answer_details_count = answer_details.length
+				share_record = ShareRecord.find_by_user_id_and_status @user.id, ShareRecord::STATUS[:UNFINISH]
+				if share_record && answer_details_count == 0 
+					share_user = User.find_by_open_id share_record.open_id
+					if share_user
+						share_user.update_attributes(:gold => (share_user.gold+10))	
+						share_record.update_attributes(:status => ShareRecord::STATUS[:FINISH])
+					end	
+				end
+			end	
 		end	
 	end
 
