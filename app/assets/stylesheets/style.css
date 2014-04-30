@@ -37,6 +37,17 @@ article:after{
 	content:".";
 }
 
+.tab_share {
+    position: fixed;
+    z-index: 3000;
+    top: 0px;
+    right: 0px;
+    width: 250px;
+    height: 200px;
+    background: url(/assets/share.png) no-repeat;
+    display: none;
+}
+
 /*2*/
 .ad { position: relative; overflow: hidden; height: 250px; margin-bottom: 50px;}
 .ad ul { display: block; height: 250px; margin: 0 auto;}
