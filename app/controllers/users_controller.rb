@@ -3,7 +3,6 @@ class UsersController < ApplicationController
 	#我的概览
 	def index
 		@status = params[:status]
-    @if_finished = params[:if_finished]
 		user_id = cookies[:user_id]
 		if user_id.present?
 			@user = User.find_by_id user_id
@@ -98,7 +97,7 @@ class UsersController < ApplicationController
 			@question = info[:question]
 			@step = info[:step]
 			recduce_gold = 0
-			if @question.present?	
+			if !@question.present?
 				case user.level
 					when Question::LEVEL_TYPE[:START] then recduce_gold = 20
 					when Question::LEVEL_TYPE[:PRIMARY] then recduce_gold = 50
@@ -106,19 +105,21 @@ class UsersController < ApplicationController
 					when Question::LEVEL_TYPE[:ENTRANCE] then recduce_gold = 50
 					when Question::LEVEL_TYPE[:FOUR] then recduce_gold = 100
 					when Question::LEVEL_TYPE[:SIX] then recduce_gold = 100				
-				end			
-				if user.gold >= recduce_gold 
-					@status = true
-					flash[:notice] = "解锁成功，恭喜您升入新等级！"
-					user.update_attributes(:level => (user.level+1), :gold => (user.gold-recduce_gold))	
-				else
-					@status = false
-					flash[:notice] = "您的金币不足，无法解锁新等级！"
 				end
-      else
-        @status = true
-        @if_finished = true
-        flash[:notice] = "恭喜您通关完成！"
+        if user.level != Question::LEVEL_TYPE[:ABROAD]
+          if user.gold >= recduce_gold
+            @status = true
+            flash[:notice] = "解锁成功，恭喜您升入新等级！"
+            user.update_attributes(:level => (user.level+1), :gold => (user.gold-recduce_gold))
+          else
+            @status = false
+            flash[:notice] = "您的金币不足，无法解锁新等级！"
+          end
+        else
+           @status = true
+           flash[:notice] = "恭喜您通关完成！"
+        end
+				
 			end
 		end
 	end		
