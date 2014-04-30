@@ -11,10 +11,14 @@ class WeixinsController < ApplicationController
     signature, timestamp, nonce, echostr, cweb = params[:signature], params[:timestamp], params[:nonce], params[:echostr], params[:cweb]
     tmp_encrypted_str = get_signature(cweb, timestamp, nonce)
     if request.request_method == "POST" && tmp_encrypted_str == signature
-      if params[:xml][:MsgType] == "text"   #用户发送文字消息
+      if params[:xml][:MsgType] == "event" && params[:xml][:Event] == "subscribe"   #用户关注事件
+        @message = "回复1，开始试炼"
+        xml = teplate_xml
+        render :xml => xml
+      elsif params[:xml][:MsgType] == "text"   #用户发送文字消息
         content = params[:xml][:Content]
-        if content=="试炼"
-          @message = "&lt;a href='#{Constant::SERVER_PATH}?open_id=#{params[:xml][:FromUserName]}' &gt;点击试炼&lt;/a&gt;"
+        if content.to_s=="1"
+          @message = "&lt;a href='#{Constant::SERVER_PATH}?open_id=#{params[:xml][:FromUserName]}' &gt;开始试炼&lt;/a&gt;"
           xml = teplate_xml
           render :xml => xml        #关注 自动回复的文字消息
         else
