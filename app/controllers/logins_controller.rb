@@ -22,7 +22,7 @@ class LoginsController < ApplicationController
       @user= User.find_by_uniq_id(openid)
       if @user.nil?
       	@user = User.create(:level => User::INIT_LEVEL, :complete_per_cent => User::INIT_COMPLETE_PER_CENT, :gold => User::FIRST_REWORD_GOLD, :uniq_id => openid,:open_id =>cookies[:open_id] )
-        share_record = ShareRecord.find_by_open_id_and_user_id share_open_id, user_id
+        share_record = ShareRecord.find_by_open_id_and_user_id share_open_id, @user.id
         if share_record.nil? && share_open_id.present?
           ShareRecord.create(:user_id => @user.id, :open_id => share_open_id, :status => ShareRecord::STATUS[:UNFINISH])
         end
