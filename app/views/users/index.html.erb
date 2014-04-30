@@ -1,52 +1,56 @@
 <%if @status.present? %>
-<script>
+  <script>
     setTimeout('window.location.href="/users";',3000);
-</script>
+  </script>
 <% end %>
 <section class="aboutMe">
-    <h1>我的概况</h1>
-     <ul>
-        <% level_name = @step == "first" ? "简单" : "进阶" %>
-        <li><label class="grade_icon">等&nbsp;&nbsp;&nbsp;级：</label><span><%= @user.level.present? ? "#{@user.level}级-#{level_name}" : "暂无数据" %></span><a href="/users/level_introduction">...</a></li>
-        <li><label class="complete_icon">完成度：</label>
-            <span>
-                <% if @current_level_questions_count.to_i > 0 %>
-                    <%= (@finish_questions_count/@current_level_questions_count* 100)  %>%
-                <% else %>
-                    暂无题目
-                <% end %>
-            </span></li>
-        <li><label class="gold_icon">金&nbsp;&nbsp;&nbsp;币：</label><span><%= @user.gold.present? ? "#{@user.gold}" : "暂无数据" %></span><a href="/users/promotion">...</a></li>
-     </ul>
+  <h1>我的概况</h1>
+  <ul>
+    <% level_name = @step == "first" ? "简单" : "进阶" %>
+    <li><label class="grade_icon">等&nbsp;&nbsp;&nbsp;级：</label><span><%= @user.level.present? ? "#{@user.level}级-#{level_name}" : "暂无数据" %></span><a href="/users/level_introduction">...</a></li>
+    <li><label class="complete_icon">完成度：</label>
+      <span>
+        <% if @current_level_questions_count.to_i > 0 %>
+          <%= ((@finish_questions_count/@current_level_questions_count.to_f)* 100).to_i  %>%
+        <% else %>
+          暂无题目
+        <% end %>
+      </span></li>
+    <li><label class="gold_icon">金&nbsp;&nbsp;&nbsp;币：</label><span><%= @user.gold.present? ? "#{@user.gold}" : "暂无数据" %></span><a href="/users/promotion">...</a></li>
+  </ul>
 </section>
 <section class="btn_box">
-    <% if @questions.any? %>
-        <% if @question.present? %>
-            <a href="/questions" class="orange_btn">开始试炼</a>
-            <a href="http://mp.weixin.qq.com/s?__biz=MzA4MzYxOTAwMg==&mid=200241907&idx=1&sn=35680cdd9a534fad2a4b0e63acd5aa58#rd" class="yellow_btn">关注句子酷</a>
-        <% else %>
-            <%if @status && @status == "false" %>
-                <div class="tooltip"><%= flash[:notice] %><span class="arrow"></span></div>   
-            <% end %>    
-            <a href="javascript:void(0)" class="orange_btn" onclick="unlock_next_level(this)">解锁等级</a>
-        <% end %>
+  <% if @questions.any? %>
+    <% if @question.present? %>
+      <a href="/questions" class="orange_btn">开始试炼</a>
+      <a href="http://mp.weixin.qq.com/s?__biz=MzA4MzYxOTAwMg==&mid=200241907&idx=1&sn=35680cdd9a534fad2a4b0e63acd5aa58#rd" class="yellow_btn">关注句子酷</a>
     <% else %>
-        当前等级暂无题目
-    <% end %>    
+      <%if @status && @status == "false" %>
+        <div class="tooltip"><%= flash[:notice] %><span class="arrow"></span></div>
+      <% end %>
+      <% if @if_finished %>
+        <a href="javascript:void(0)" class="orange_btn" onclick="unlock_next_level(this)">解锁等级</a>
+      <% else %>
+        <a href="javascript:void(0)" class="orange_btn">完成通关</a>
+      <% end %>
+    <% end %>
+  <% else %>
+    当前等级暂无题目
+  <% end %>
 </section>
 
 <% if @status && @status == "true" %>
-<div class="tab" id="success" style="display:none;">
+  <div class="tab" id="success" style="display:none;">
     <p style="text-align: left;line-height: 24px;margin: 20px 10px;"><%= flash[:notice] %></p>
-</div>
-<script>
-popup("#success");
-setTimeout('hide_success()',3000);
+  </div>
+  <script>
+    popup("#success");
+    setTimeout('hide_success()',3000);
     function hide_success()
     {
-        $("#success").empty();
-        $("#success").hide();
-        $("#panel") .hide();
+      $("#success").empty();
+      $("#success").hide();
+      $("#panel") .hide();
     }
-</script>
+  </script>
 <% end %>

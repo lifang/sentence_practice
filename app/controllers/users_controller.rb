@@ -2,8 +2,8 @@
 class UsersController < ApplicationController
 	#我的概览
 	def index
-		url = request.url 
-		@status = url.scan(/status\=.*/).first.to_s.gsub(/status\=/,"")
+		@status = params[:status]
+    @if_finished = params[:if_finished]
 		user_id = cookies[:user_id]
 		if user_id.present?
 			@user = User.find_by_id user_id
@@ -23,7 +23,8 @@ class UsersController < ApplicationController
 					@finish_questions_count = AnswerDetail.where(["question_id in (?) and second_status = ? and user_id = ?",
 						current_level_questions_id, true, @user.id]).count if current_level_questions_id.present? && 
 										current_level_questions_id.any?
-				end						
+				end
+        #File.open("#{Rails.root}/public/1.log", "a"){|f| f.write @finish_questions_count.to_s + "------------"}
 			else	
 				redirect_to root_path
 			end	
@@ -97,7 +98,7 @@ class UsersController < ApplicationController
 			@question = info[:question]
 			@step = info[:step]
 			recduce_gold = 0
-			if !@question.present?	
+			if @question.present?	
 				case user.level
 					when Question::LEVEL_TYPE[:START] then recduce_gold = 20
 					when Question::LEVEL_TYPE[:PRIMARY] then recduce_gold = 50
@@ -113,7 +114,11 @@ class UsersController < ApplicationController
 				else
 					@status = false
 					flash[:notice] = "您的金币不足，无法解锁新等级！"
-				end	
+				end
+      else
+        @status = true
+        @if_finished = true
+        flash[:notice] = "恭喜您通关完成！"
 			end
 		end
 	end		
