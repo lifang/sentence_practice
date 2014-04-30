@@ -6,7 +6,7 @@
         <li><label class="complete_icon">完成度：</label>
             <span>
                 <% if @current_level_questions_count.to_i > 0 %>
-                    <%= (@finish_questions_count.to_f/@current_level_questions_count* 100).round(1)  %>
+                    <%= (@finish_questions_count/@current_level_questions_count* 100) %>%
                 <% else %>
                     暂无数据
                 <% end %>
@@ -31,13 +31,13 @@
             <li><label class="complete_icon">完成度：</label>
                 <span>
                     <% if @current_level_questions_count.to_i > 0 %>
-                        <%= (@finish_questions_count.to_f/@current_level_questions_count* 100).round(1)  %>
+                        <%= (@finish_questions_count/@current_level_questions_count* 100)  %>%
                     <% else %>
                         暂无数据
                     <% end %>
                 </span>
             </li>
-            <li><label class="gold_icon">金&nbsp;&nbsp;&nbsp;币：</label><span>-1</span></li>
+            <li><label class="gold_icon">金&nbsp;&nbsp;&nbsp;币：</label><span><%= @gold > 0 ? "-1" : "+0" %></span></li>
          </ul>  
     </section>
 <% end %>

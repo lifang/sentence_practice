@@ -38,6 +38,7 @@ class UsersController < ApplicationController
 		user = User.find_by_id user_id
 		correct_counts = params[:correct_counts]
 		@correct_counts = correct_counts.to_i
+		@gold = user.gold
 		if user
 			if @correct_counts < 5
 				if user.gold > 0
@@ -53,9 +54,9 @@ class UsersController < ApplicationController
 
 	#显示得分
 	def show_score
-		url = request.url
+		@correct_counts =  params[:correct_counts].to_i
+		@gold = params[:gold].to_i
 		user_id = cookies[:user_id]
-		@correct_counts = url.scan(/correct_counts\=.*/).first.to_s.gsub(/correct_counts\=/,"").to_i
 		user = User.find_by_id user_id
 		info = Question.get_next_question user
 		@question = info[:question]
