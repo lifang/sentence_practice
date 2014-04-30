@@ -166,18 +166,17 @@ function popup(div_id)
 	var windows_width = $(window).width();
 	var doc_height = $(document).height();
 	
-	$("#panel").height(windows_height);
-	$("#panel").width(doc_height);
+	$("#panel").height(doc_height);
+	$("#panel").width(windows_width);
 	var div_height = $(div_id).height();
 	var div_width = $(div_id).width();
+	div_width = div_width + 20;
 	var top = (windows_height - div_height)/2;
 	var left = (windows_width - div_width)/2;	
-	$(div_id).css("top", top);
-	$(div_id).css("left", left);
+	$(div_id).css("top", top+"px");
+	$(div_id).css("left", left+"px");
 	$(div_id).css("z-index", 100);
 	$(div_id).show();
-	// var div_obj = $(div_id);
-	// $("#panel").append(div_obj);
 	$("#panel").show();
 }
 
