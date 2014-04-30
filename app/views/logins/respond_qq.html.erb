@@ -32,7 +32,7 @@
           var bIsCE= sUserAgent.match(/windows ce/i) == "windows ce"; 
           var bIsWM= sUserAgent.match(/windows mobile/i) == "windows mobile";
           if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
-            document.location.href='http://test.sunworldmedia.com';
+            document.location.href="<%=Constant::SERVER_PATH%>";
           } else {
             window.opener.location.reload();
             window.close();
