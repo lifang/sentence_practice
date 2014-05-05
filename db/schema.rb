@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140424024544) do
+ActiveRecord::Schema.define(:version => 20140505032700) do
 
   create_table "answer_details", :force => true do |t|
     t.integer  "question_id"
@@ -36,8 +36,6 @@ ActiveRecord::Schema.define(:version => 20140424024544) do
     t.string   "similar_words"
   end
 
-  add_index "questions", ["level_types"], :name => "index_questions_on_level_types"
-
   create_table "share_records", :force => true do |t|
     t.integer  "user_id"
     t.string   "open_id"
@@ -56,6 +54,7 @@ ActiveRecord::Schema.define(:version => 20140424024544) do
     t.string   "open_id"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+    t.string   "nickname"
   end
 
 end

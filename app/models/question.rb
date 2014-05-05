@@ -2,9 +2,9 @@
 class Question < ActiveRecord::Base
 	attr_protected :authentications
 	has_many :answer_details, :dependent => :destroy
-	LEVEL_TYPE = {:START => 0, :PRIMARY => 1, :EXAMINATION => 2, :ENTRANCE => 3, :FOUR => 4, :SIX => 5, :ABROAD => 6}
-	               #0 入门     1 初级    2 中考    3 高考    4 四级    5 六级    6  出国
-	LEVEL_NAME = {0 => "入门", 1 => "初级", 2 => "中考", 3 =>"高考", 4 =>"四级", 5 => "六级", 6 => "出国"}     
+	LEVEL_TYPE = {:START => 1, :PRIMARY => 2, :EXAMINATION => 3, :ENTRANCE => 4, :FOUR => 5, :SIX => 6, :ABROAD => 7}
+	               #1 入门     2 初级    3 中考    4 高考    5 四级    6 六级    7  出国
+	LEVEL_NAME = {1 => "入门", 2 => "初级", 3 => "中考", 4 =>"高考", 5 =>"四级", 6 => "六级", 7 => "出国"}     
 
 	def self.get_next_question user
 		questions = Question.where(["level_types = ?", user.level])
@@ -24,7 +24,7 @@ class Question < ActiveRecord::Base
 				question = Question.where(["level_types = ?", user.level]).order("Rand()").limit(1)
 			end	
 			question = question.first
-		end	
+		end
 		{:question => question, :step => step}
 	end         
 end
