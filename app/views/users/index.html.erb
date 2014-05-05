@@ -4,7 +4,7 @@
 </script>
 <% end %>
 <section class="aboutMe">
-    <h1>我的概况(昵称：<%= @user.nickname %>)</h1>
+    <h1><%= @user.nickname %>的概况</h1>
      <ul>
         <% level_name = @step == "first" ? "简单" : "进阶" %>
         <li><label class="grade_icon">等&nbsp;&nbsp;&nbsp;级：</label><span><%= @user.level.present? ? "#{@user.level}级-#{level_name}" : "暂无数据" %></span><a href="/users/level_introduction">...</a></li>
