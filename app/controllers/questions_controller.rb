@@ -20,7 +20,7 @@ class QuestionsController < ApplicationController
 						share_record.update_attributes(:status => ShareRecord::STATUS[:FINISH])
 					end	
 				end
-			end	
+			end
 		end	
 	end
 

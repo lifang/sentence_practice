@@ -25,6 +25,7 @@ class Question < ActiveRecord::Base
 			end	
 			question = question.first
 		end
+		
 		{:question => question, :step => step}
 	end         
 end

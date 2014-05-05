@@ -105,7 +105,7 @@ article:after{
 .chooseArea {}
 .chooseArea li { display: inline-block; padding: 2px 5px; margin: 5px; border: 1px #e1e4e9 solid; font-size: 18px;}
 
-.btn_box .s_btn { width: 120px; margin: 0 10px; display: inline-block;}
+.btn_box .s_btn { width: 110px; margin: 0 10px; display: inline-block;}
 
 /*tab*/
 .tab { 
@@ -140,7 +140,7 @@ article:after{
 .tab_btn a.orange_btn { width: 120px; display: inline-block;}
 
 /*8*/
-.practice { width: 170px; margin: 20px auto 50px auto;}
+.practice { width: 200px; margin: 20px auto 50px auto;}
 .practice h1 {
 	text-align: center;
 	height: 40px; 

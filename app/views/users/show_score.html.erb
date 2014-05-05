@@ -42,6 +42,8 @@
     </section>
 <% end %>
 <section class="btn_box">
-    <a href="/questions" class="orange_btn">新的试炼</a>
+    <% if @user.level != Question::LEVEL_TYPE[:ABROAD] && !@question.present? %>
+        <a href="/questions" class="orange_btn">新的试炼</a>
+    <% end %>    
     <a href="/users" class="yellow_btn">我的概况</a>
 </section>

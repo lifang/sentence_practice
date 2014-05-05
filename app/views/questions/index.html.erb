@@ -56,3 +56,12 @@ setInterval('startTime()', 1000);
         <div class="tab_btn"><a href="javascript:void(0)" class="orange_btn" onclick="$(this).parents('.tab').hide();$('#panel').hide();$('.correct_counts').val(0);">继续</a></div>
     </div>    
 </div>
+
+<div id="finish_all" class="tab" style="display:none;">
+    <div class="tab_con">
+        <div class="time">
+            恭喜，您已通关！
+        </div>
+    </div>
+    <div class="tab_btn"><a href="javascript:void(0)" class="orange_btn" onclick="view_score(this)">查看成绩</a></div>
+</div>

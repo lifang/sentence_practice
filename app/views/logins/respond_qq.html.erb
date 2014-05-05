@@ -8,23 +8,6 @@
   script.src = url;
   document.body.appendChild(script);
   function callback(user){
-    var nickname = "";
-    $.ajax({
-      async:true,
-      type: "POST",
-      url: "https://graph.qq.com/user/get_user_info",
-      dataType: "json",
-      data : {
-        oauth_consumer_key : <%= Oauth2Helper::APPID %>,
-        openid :user.openid,
-        access_token : access_token,
-
-      },
-      success: function(data){
-        nickname = data["nickname"];
-      }    
-    });
-
     $.ajax({
       async:true,
       type: "POST",
@@ -32,8 +15,7 @@
       dataType: "json",
       data : {
         open_id :user.openid,
-        access_token:access_token,
-        nickname : nickname
+        access_token:access_token
       },
       success: function(data){
         if(data){

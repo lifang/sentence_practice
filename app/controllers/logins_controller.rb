@@ -1,4 +1,5 @@
 #encoding: utf-8
+include Oauth2Helper
 class LoginsController < ApplicationController
   def request_qq
     redirect_to "#{Oauth2Helper::REQUEST_URL_QQ}?#{Oauth2Helper::REQUEST_ACCESS_TOKEN.map{|k,v|"#{k}=#{v}"}.join("&")}"
@@ -10,6 +11,7 @@ class LoginsController < ApplicationController
 
   def enter
     share_open_id = cookies[:share_open_id]
+    nickname = params[:nickname]
   	begin
       meters=params[:access_token].split("&")
       access_token=meters[0].split("=")[1]
@@ -32,6 +34,17 @@ class LoginsController < ApplicationController
         if @user.open_id.nil?
           @user.update_attributes(:open_id=> cookies[:open_id])
         end
+      end
+      user_url="https://graph.qq.com"
+      user_route="/user/get_user_info?access_token=#{access_token}&oauth_consumer_key=#{Oauth2Helper::APPID}&openid=#{openid}"
+      user_info=create_get_http(user_url,user_route)
+      nickname = user_info["nickname"]
+      if @user
+        if nickname.present?
+          @user.update_attributes(:nickname => nickname)  
+        else 
+          @user.update_attributes(:nickname => "qq用户") 
+        end  
       end
       data=true
     rescue

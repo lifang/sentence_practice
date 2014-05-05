@@ -45,6 +45,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.25.1)
     multi_json (1.9.2)
+    multipart-post (1.1.5)
     mysql2 (0.3.10)
     polyglot (0.3.4)
     prototype-rails (3.2.1)
@@ -94,6 +95,7 @@ PLATFORMS
 
 DEPENDENCIES
   jquery-rails (~> 2.1.0)
+  multipart-post (= 1.1.5)
   mysql2 (= 0.3.10)
   prototype-rails
   rails (= 3.2.1)

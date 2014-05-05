@@ -57,22 +57,23 @@ class UsersController < ApplicationController
 		@correct_counts =  params[:correct_counts].to_i
 		@gold = params[:gold].to_i
 		user_id = cookies[:user_id]
-		user = User.find_by_id user_id
-		info = Question.get_next_question user
+		@user = User.find_by_id user_id
+		info = Question.get_next_question @user
 		@question = info[:question]
 		@step = info[:step]	
-		current_level_questions = Question.where(["level_types = ?",user.level])
+		current_level_questions = Question.where(["level_types = ?",@user.level])
 		current_level_questions_id = current_level_questions.map(&:id)
 		@current_level_questions_count = current_level_questions.length
 		if @step == "first"
 			@finish_questions_count = AnswerDetail.where(["question_id in (?) and first_status = ? and user_id = ?",
-				current_level_questions_id, true, user.id]).count if current_level_questions_id.present? && 
+				current_level_questions_id, true, @user.id]).count if current_level_questions_id.present? && 
 								current_level_questions_id.any?
 		else
 			@finish_questions_count = AnswerDetail.where(["question_id in (?) and second_status = ? and user_id = ?",
-				current_level_questions_id, true, user.id]).count if current_level_questions_id.present? && 
+				current_level_questions_id, true, @user.id]).count if current_level_questions_id.present? && 
 								current_level_questions_id.any?
-		end	
+		end
+
 	end	
 
 	#解锁等级
