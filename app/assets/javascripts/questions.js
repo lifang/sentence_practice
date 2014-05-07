@@ -192,6 +192,12 @@ function continue_question(obj)
 	{
 		correct_counts = parseInt(correct_counts) + parseInt(correct);
 		$(".correct_counts").val(correct_counts);
+		$("#number").val(correct_counts);
+		if(correct_counts >=5 )
+		{
+			$("#number").removeClass("num_red");	
+			$("#number").addClass("num_green");	
+		}
 		// alert(correct_counts);
 	}
 	if(correct == 1 || correct == 0)

@@ -8,7 +8,7 @@ setInterval('startTime()', 1000);
 <section class="exercises">
 	<div class="ex_title">
     	<div class="timer"><p style="width: 100%;"></p><input type="hidden" class="time" value="180"></div>
-        <div class="num_red">0</div>
+        <div id="number" class="num_red">0</div>
     </div>
     <div class="ex_con" >
         <%= render "one_que", {:question => @question} %>
