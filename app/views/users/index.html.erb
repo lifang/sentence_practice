@@ -7,7 +7,8 @@
     <h1><%= @user.nickname %>的概况</h1>
      <ul>
         <% level_name = @step == "first" ? "简单" : "进阶" %>
-        <li><label class="grade_icon">等&nbsp;&nbsp;&nbsp;级：</label><span><%= @user.level.present? ? "#{@user.level}级-#{level_name}" : "暂无数据" %></span><a href="/users/level_introduction">...</a></li>
+        <li><label class="grade_icon">等&nbsp;&nbsp;&nbsp;级：</label>
+          <span><%= @user.level.present? ? "#{load_level_name @user.level}(#{level_name})" : "暂无数据" %></span><a href="/users/level_introduction">...</a></li>
         <li><label class="complete_icon">完成度：</label>
             <span>
                 <% if @current_level_questions_count.to_i > 0 %>
@@ -16,7 +17,8 @@
                     暂无题目
                 <% end %>
             </span></li>
-        <li><label class="gold_icon">金&nbsp;&nbsp;&nbsp;币：</label><span><%= @user.gold.present? ? "#{@user.gold}" : "暂无数据" %></span><a href="/users/promotion">...</a></li>
+        <li><label class="gold_icon">金&nbsp;&nbsp;&nbsp;币：</label>
+          <span><%= @user.gold.present? ? "#{@user.gold}" : "暂无数据" %></span><a href="/users/promotion" style="display:none;">...</a></li>
      </ul>
 </section>
 <section class="btn_box">

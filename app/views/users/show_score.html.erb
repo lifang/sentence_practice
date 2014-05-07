@@ -1,6 +1,6 @@
 <% if @correct_counts >= 5 %>
 <section class="practice">
-    <h1>试炼成功</h1>
+    <h1 class="winner">试炼成功</h1>
      <ul>
         <li><label class="reply_icon">答&nbsp;&nbsp;&nbsp;对：</label><span><%= @correct_counts %>题</span></li>
         <li><label class="complete_icon">完成度：</label>
@@ -27,7 +27,8 @@
     <section class="practice">
         <h1 class="loser">试炼失败</h1>
          <ul>
-            <li><label class="reply_icon">答&nbsp;&nbsp;&nbsp;对：</label><span><%= @correct_counts %>题</span></li>
+            <li><label class="reply_icon">答&nbsp;&nbsp;&nbsp;对：</label>
+                <span><%= @correct_counts %>题</span></li>
             <li><label class="complete_icon">完成度：</label>
                 <span>
                     <% if @current_level_questions_count.to_i > 0 %>
@@ -37,7 +38,8 @@
                     <% end %>
                 </span>
             </li>
-            <li><label class="gold_icon">金&nbsp;&nbsp;&nbsp;币：</label><span><%= @gold > 0 ? "-1" : "0" %></span></li>
+            <li><label class="gold_icon">金&nbsp;&nbsp;&nbsp;币：</label>
+                <span><%= @gold > 0 ? "-1" : "0" %></span></li>
          </ul>  
     </section>
 <% end %>

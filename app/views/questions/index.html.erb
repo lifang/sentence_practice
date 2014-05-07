@@ -1,11 +1,14 @@
 <% if @question %>
 <script>
+$(document).ready(function(){
+    popup("#start");    
+})
 setInterval('startTime()', 1000);
 </script>
 <section class="exercises">
 	<div class="ex_title">
     	<div class="timer"><p style="width: 100%;"></p><input type="hidden" class="time" value="180"></div>
-        <div class="num">180</div>
+        <div class="num_red">0</div>
     </div>
     <div class="ex_con" >
         <%= render "one_que", {:question => @question} %>
@@ -64,4 +67,13 @@ setInterval('startTime()', 1000);
         </div>
     </div>
     <div class="tab_btn"><a href="javascript:void(0)" class="orange_btn" onclick="view_score(this)">查看成绩</a></div>
+</div>
+
+<div id="start" class="tab" style="display:none;">
+    <div class="tab_con">
+        <div class="welcome">
+            欢迎来到句子酷，在三分钟内至少答对五道题可获金币奖励！
+        </div>
+    </div>
+    <div class="tab_btn"><a href="javascript:void(0)" class="orange_btn" onclick="$('#panel').hide();$(this).parents('.tab').hide()">知道了</a></div>
 </div>

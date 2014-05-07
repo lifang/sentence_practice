@@ -224,7 +224,8 @@ function startTime()
 	var time = $(".time").val();
 	time = parseInt(time);
 	var unlock_level_display =  $("#unlock_level").css("display");
-	if(unlock_level_display == "none")
+	var start_display =  $("#start").css("display");
+	if(unlock_level_display == "none" && start_display == "none")
 	{
 		if(time > 0)
 		{
@@ -233,7 +234,7 @@ function startTime()
 			var per_cent = (time/180.0)*100;
 			// $(".timer").find("p").text("剩余"+time+"秒");
 			$(".timer").find("p").css("width", per_cent+"%");
-			$(".num").text(time);
+			// $(".num").text(time);
 		}	
 		else
 		{
