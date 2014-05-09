@@ -11,7 +11,8 @@ module Oauth2Helper
   #请求openId
   REQUEST_OPENID_URL="https://graph.qq.com/oauth2.0/me"
   #请求详参
-  APPID="101071254"
+  APPID="101071254" #production appid
+  # APPID="101069759" #test appid
   REQUEST_ACCESS_TOKEN={
     :response_type=>"token",
     :client_id=>APPID,

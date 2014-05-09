@@ -1,5 +1,7 @@
 <% if @question.present? %>
-	$(".ex_con").html('<%=j(render "one_que", {:question => @question})%>');
+	<% words_count = @question.original_sentence.split(" ").length %>
+	$(".ex_con").html('<%=j(render "one_que", {:question => @question, :words_count => words_count})%>');
+	$(".chooseArea").html('<%=j(render "choose_options", {:question => @question})%>');
 	var old_step = $(".step").val();
 	var new_step = "<%= @step %>";
 	if(old_step == new_step)
@@ -16,7 +18,7 @@
 	<% if @user.level == Question::LEVEL_TYPE[:ABROAD] %>
 		popup("#finish_all");	
 	<% else %>
-		$(".level_name").text("下一级：<%= @level_name %>");
+		$(".level_name").text("下一级：LV. <%= @level_name %>");
 		$(".reduce_gold_number").text("解锁费用：<%= @recduce_gold %>");
 		popup("#unlock_level");
 	<% end %>

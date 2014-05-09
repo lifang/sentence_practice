@@ -8,47 +8,47 @@ function select_item(obj)
 	$("#back_step_btn").addClass("orange_btn");
     var word = $(obj).text();
     $(obj).css("cursor","default");
-    var answer = $(obj).parents(".ex_con").find(".answer_text").val();
+    var answer = $(".ex_con").find(".answer_text").val();
     answer = answer + " " + word;
-    $(obj).parents(".ex_con").find(".answer_text").val(answer);
+    $(".ex_con").find(".answer_text").val(answer);
     var index = $(obj).index();
-    var index_order = $(obj).parents(".ex_con").find(".index_order").val();
+    var index_order = $(".ex_con").find(".index_order").val();
     if(index_order == "")
     {
-    	$(obj).parents(".ex_con").find(".index_order").val(index);
+    	$(".ex_con").find(".index_order").val(index);
     }
     else
 	{
-		$(obj).parents(".ex_con").find(".index_order").val(index_order+","+index);
+		$(".ex_con").find(".index_order").val(index_order+","+index);
 	}
     $(obj).css("background-color","#eee");
     $(obj).css("color","#ccc");
     $(obj).removeAttr("onclick");
-    var question_id = $(obj).parents(".ex_con").attr("id");
+    var question_id = $(".ex_con").attr("id");
     $(".btn_box").find(".current_question_id").val(question_id);
     var text_li = "<li style='margin:0 3px;'>"+ word + "</li>";
-    $(obj).parents(".ex_con").find(".answer").find("ul").append(text_li);
-    var all_index = $(obj).parents(".ex_con").find(".index_order").val();
+    $(".ex_con").find(".answer").find("ul").append(text_li);
+    var all_index = $(".ex_con").find(".index_order").val();
     //判断选完当前词语后，词语是否全部填写完毕
-    if(all_index != "")
-    {
-    	// alert(all_index);
-    	var all_index = all_index.split(",");
-    	var select_item_length = all_index.length;
-    	var children_length = $(obj).parents(".ex_con").find(".word_number").val();
-    	if(select_item_length == children_length)
-    	{
-    		$("#finish_btn").removeClass("gray_btn");
-    		$("#finish_btn").addClass("orange_btn");
-    		$("#finish_btn").attr("onclick","check_answer(this)");
-    	}	
-    }
+    // if(all_index != "")
+    // {
+    // 	// alert(all_index);
+    // 	var all_index = all_index.split(",");
+    // 	var select_item_length = all_index.length;
+    // 	var children_length = $(".ex_con").find(".word_number").val();
+    // 	if(select_item_length == children_length)
+    // 	{
+    // 		$("#finish_btn").removeClass("gray_btn");
+    // 		$("#finish_btn").addClass("orange_btn");
+    // 		$("#finish_btn").attr("onclick","check_answer(this)");
+    // 	}	
+    // }
 }
 
 //做题时后退一步
 function back_step(obj)
 {
-	var question_div = $(obj).parent().prev().find(".ex_con");
+	var question_div = $(".ex_con");
 	var index_order = $(question_div).find(".index_order").val();
 	if(index_order != "")
 	{	
@@ -59,7 +59,7 @@ function back_step(obj)
 			if(last_index < 0 && index_order != "") 	
 			{
 				var resume_index = index_order;
-				var resume_li = $(question_div).find(".chooseArea").find("ul").find("li:eq("+ resume_index +")");
+				var resume_li = $(".chooseArea").find("ul").find("li:eq("+ resume_index +")");
 				$(resume_li).attr("onclick","select_item(this)");
 				$(resume_li).removeAttr("style");
 				$(question_div).find(".index_order").val("");
@@ -68,7 +68,7 @@ function back_step(obj)
 			else if(last_index >= 0)
 			{
 				var resume_index = index_order.substr(last_index+1);
-				var resume_li = $(question_div).find(".chooseArea").find("ul").find("li:eq("+ resume_index +")");
+				var resume_li = $(".chooseArea").find("ul").find("li:eq("+ resume_index +")");
 				$(resume_li).attr("onclick","select_item(this)");
 				$(resume_li).removeAttr("style");
 				$(resume_li).css("cursor","pointer");
@@ -94,15 +94,15 @@ function back_step(obj)
 			}
 			else
 			{
-				var index_arr = index_order.split(",");
-				var index_arr_length = index_arr.length;
-				var children_length = $(question_div).find(".word_number").val();
-				if(index_arr_length < children_length)
-				{
-					$("#finish_btn").removeClass("orange_btn");
-					$("#finish_btn").addClass("gray_btn");
-					$("#finish_btn").removeAttr("onclick");	
-				}
+				// var index_arr = index_order.split(",");
+				// var index_arr_length = index_arr.length;
+				// var children_length = $(question_div).find(".word_number").val();
+				// if(index_arr_length < children_length)
+				// {
+				// 	$("#finish_btn").removeClass("orange_btn");
+				// 	$("#finish_btn").addClass("gray_btn");
+				// 	$("#finish_btn").removeAttr("onclick");	
+				// }
 			}	
 		}
 		
@@ -113,14 +113,14 @@ function back_step(obj)
 function check_answer(obj)
 {
 	var step = $(".btn_box").find(".step").val();
-	var question_id = $(obj).parent().prev().find(".question_id").val();
-	var correct_answer = $(obj).parent().prev().find(".correct_answer").val();
-	var answer = $(obj).parent().prev().find(".answer_text").val();
+	var question_id = $(".question_id").val();
+	var correct_answer = $(".correct_answer").val();
+	var answer = $(".answer_text").val();
 	correct_answer = correct_answer.replace(/\s/g,"");
 	answer = answer.replace(/\s/g,"");
-	$("#finish_btn").removeClass("orange_btn");
-	$("#finish_btn").addClass("gray_btn");
-	$("#finish_btn").removeAttr("onclick");
+	// $("#finish_btn").removeClass("orange_btn");
+	// $("#finish_btn").addClass("gray_btn");
+	// $("#finish_btn").removeAttr("onclick");
 	$("#back_step_btn").removeClass("orange_btn");
 	$("#back_step_btn").addClass("gray_btn");
 	$("#back_step_btn").removeAttr("onclick");
@@ -192,7 +192,7 @@ function continue_question(obj)
 	{
 		correct_counts = parseInt(correct_counts) + parseInt(correct);
 		$(".correct_counts").val(correct_counts);
-		$("#number").val(correct_counts);
+		$("#number").text(correct_counts);
 		if(correct_counts >=5 )
 		{
 			$("#number").removeClass("num_red");	

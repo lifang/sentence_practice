@@ -8,6 +8,9 @@ class QuestionsController < ApplicationController
 			info = Question.get_next_question @user
 			@question = info[:question]
 			@step = info[:step]
+			if @question
+				@words_count = @question.original_sentence.split(" ").length
+			end	
 			if @user.level == Question::LEVEL_TYPE[:START]
 				#奖励分享用户的金币
 				answer_details = AnswerDetail.where(["user_id = ?", @user.id])
@@ -21,6 +24,10 @@ class QuestionsController < ApplicationController
 					end	
 				end
 			end
+			@is_first = @user.is_first
+			if @is_first == true
+				@user.update_attributes(:is_first => false)
+			end	
 		end	
 	end
 
@@ -28,16 +35,16 @@ class QuestionsController < ApplicationController
 		user_id = cookies[:user_id]
 		@user = User.find_by_id user_id
 		if @user
-			@recduce_gold = 0
-			case @user.level
-				when Question::LEVEL_TYPE[:START] then @recduce_gold = 20
-				when Question::LEVEL_TYPE[:PRIMARY] then @recduce_gold = 50
-				when Question::LEVEL_TYPE[:EXAMINATION] then @recduce_gold = 100
-				when Question::LEVEL_TYPE[:ENTRANCE] then @recduce_gold = 50
-				when Question::LEVEL_TYPE[:FOUR] then @recduce_gold = 100
-				when Question::LEVEL_TYPE[:SIX] then @recduce_gold = 100				
-			end
-			@level_name = Question::LEVEL_NAME[@user.level+1]
+			@recduce_gold = 10
+			# case @user.level
+			# 	when Question::LEVEL_TYPE[:START] then @recduce_gold = 20
+			# 	when Question::LEVEL_TYPE[:PRIMARY] then @recduce_gold = 50
+			# 	when Question::LEVEL_TYPE[:EXAMINATION] then @recduce_gold = 100
+			# 	when Question::LEVEL_TYPE[:ENTRANCE] then @recduce_gold = 50
+			# 	when Question::LEVEL_TYPE[:FOUR] then @recduce_gold = 100
+			# 	when Question::LEVEL_TYPE[:SIX] then @recduce_gold = 100				
+			# end
+			@level_name = @user.level+1
 			info = Question.get_next_question @user
 			@question = info[:question]
 			@step = info[:step]

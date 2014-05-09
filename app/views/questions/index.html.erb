@@ -1,7 +1,16 @@
 <% if @question %>
 <script>
 $(document).ready(function(){
-    popup("#start");    
+    $("article").css("overflow","auto");
+    <% if @is_first == true %>
+        popup("#start"); 
+    <% end %>
+
+    var cw = document.documentElement.clientWidth;
+    $(".ex_title").css("width",cw-40 + "px");
+    $(".ex_con").css("width",cw-40 + "px");
+    $(".btn_box").css("width",cw-40 + "px");
+
 })
 setInterval('startTime()', 1000);
 </script>
@@ -11,14 +20,14 @@ setInterval('startTime()', 1000);
         <div id="number" class="num_red">0</div>
     </div>
     <div class="ex_con" >
-        <%= render "one_que", {:question => @question} %>
+        <%= render "one_que", {:question => @question, :words_count => @words_count} %>
     </div>
 </section>
-<section class="btn_box">
+<section class="btn_box" style="position: fixed;">
     <input type="hidden" value="" class="current_question_id">
     <input type="hidden" value="<%= @step %>" class="step">
     <input type="hidden" value="0" class="correct_counts">
-	<a href="javascript:void(0)" class="gray_btn s_btn" id="finish_btn" >完成</a>
+	<a href="javascript:void(0)" class="orange_btn s_btn" onclick="check_answer(this)" id="finish_btn" >完成</a>
     <a href="javascript:void(0)" class="gray_btn s_btn" id="back_step_btn" >退一步</a>
 </section>
 <% else %>
@@ -53,10 +62,10 @@ setInterval('startTime()', 1000);
 
 <div id="next_period"   class="tab" style="display:none;">
     <div class="tab_con">
-        <div class="true">
+        <div class="welcome">
             恭喜通过简单练习，下面进入复杂练习
         </div>
-        <div class="tab_btn"><a href="javascript:void(0)" class="orange_btn" onclick="$(this).parents('.tab').hide();$('#panel').hide();$('.correct_counts').val(0);">继续</a></div>
+        <div class="tab_btn"><a href="javascript:void(0)" class="orange_btn" onclick="$(this).parents('.tab').hide();$('#panel').hide();">继续</a></div>
     </div>    
 </div>
 

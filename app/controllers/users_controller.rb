@@ -26,7 +26,7 @@ class UsersController < ApplicationController
         #File.open("#{Rails.root}/public/1.log", "a"){|f| f.write @finish_questions_count.to_s + "------------"}
 			else	
 				redirect_to root_path
-			end	
+			end
 		else
 			redirect_to root_path		
 		end	
@@ -97,30 +97,29 @@ class UsersController < ApplicationController
 			info = Question.get_next_question user
 			@question = info[:question]
 			@step = info[:step]
-			recduce_gold = 0
+			recduce_gold = 10
 			if !@question.present?
-				case user.level
-					when Question::LEVEL_TYPE[:START] then recduce_gold = 20
-					when Question::LEVEL_TYPE[:PRIMARY] then recduce_gold = 50
-					when Question::LEVEL_TYPE[:EXAMINATION] then recduce_gold = 100
-					when Question::LEVEL_TYPE[:ENTRANCE] then recduce_gold = 50
-					when Question::LEVEL_TYPE[:FOUR] then recduce_gold = 100
-					when Question::LEVEL_TYPE[:SIX] then recduce_gold = 100				
-				end
-        if user.level != Question::LEVEL_TYPE[:ABROAD]
-          if user.gold >= recduce_gold
-            @status = true
-            flash[:notice] = "解锁成功，恭喜您升入新等级！"
-            user.update_attributes(:level => (user.level+1), :gold => (user.gold-recduce_gold))
-          else
-            @status = false
-            flash[:notice] = "您的金币不足，无法解锁新等级！"
-          end
-        else
-           @status = true
-           flash[:notice] = "恭喜您通关完成！"
-        end
-				
+				# case user.level
+				# 	when Question::LEVEL_TYPE[:START] then recduce_gold = 20
+				# 	when Question::LEVEL_TYPE[:PRIMARY] then recduce_gold = 50
+				# 	when Question::LEVEL_TYPE[:EXAMINATION] then recduce_gold = 100
+				# 	when Question::LEVEL_TYPE[:ENTRANCE] then recduce_gold = 50
+				# 	when Question::LEVEL_TYPE[:FOUR] then recduce_gold = 100
+				# 	when Question::LEVEL_TYPE[:SIX] then recduce_gold = 100				
+				# end
+		        if user.level != Question::LEVEL_TYPE[:ABROAD]
+		          if user.gold >= recduce_gold
+		            @status = true
+		            flash[:notice] = "解锁成功，恭喜您升入新等级！"
+		            user.update_attributes(:level => (user.level+1), :gold => (user.gold-recduce_gold))
+		          else
+		            @status = false
+		            flash[:notice] = "您的金币不足，无法解锁新等级！"
+		          end
+		        else
+		           @status = true
+		           flash[:notice] = "恭喜您通关完成！"
+		        end
 			end
 		end
 	end		
@@ -147,5 +146,46 @@ class UsersController < ApplicationController
 				redirect_to :share_open_id => user.open_id	
 			end
 		end
+	end	
+
+	#统计
+	def statistics
+		user_sql = "SELECT count(*) count FROM users"
+		tmp = User.find_by_sql user_sql
+		@user_count = tmp.count
+
+		answer_details_sql = "SELECT count(*) count FROM answer_details"
+		tmp = AnswerDetail.find_by_sql answer_details_sql
+		@answer_details_count = tmp.count
+
+		one_day_sql = "SELECT COUNT(DISTINCT user_id) count FROM answer_details 
+				where created_at > CURRENT_TIMESTAMP - INTERVAL 1 day"
+		tmp = AnswerDetail.find_by_sql one_day_sql
+		@one_day_user_count = tmp.count
+
+		one_day_answer_sql = "SELECT count(*) count FROM answer_details 
+			where created_at > CURRENT_TIMESTAMP - INTERVAL 1 day"
+		tmp = AnswerDetail.find_by_sql one_day_answer_sql
+		@one_day_answer_count = tmp.count
+
+		seven_day_sql = "SELECT COUNT(DISTINCT user_id) count FROM answer_details 
+					where created_at > CURRENT_TIMESTAMP - INTERVAL 7 day"
+		tmp = AnswerDetail.find_by_sql seven_day_sql
+		@seven_day_user_count = tmp.count 
+
+		seven_day_answer_sql = "SELECT count(*) count FROM answer_details 
+				where created_at > CURRENT_TIMESTAMP - INTERVAL 7 day"
+		tmp = AnswerDetail.find_by_sql seven_day_answer_sql
+		@seven_day_answer_count = tmp.count 
+
+		thirty_day_sql = "SELECT COUNT(DISTINCT user_id) count FROM answer_details 
+				where created_at > CURRENT_TIMESTAMP - INTERVAL 30 day"
+		tmp = AnswerDetail.find_by_sql thirty_day_sql
+		@thirty_day_user_count = tmp.count  
+
+		thirty_day_user_sql = "SELECT count(*) count from answer_details
+						where created_at > CURRENT_TIMESTAMP - INTERVAL 30 day"
+		tmp = AnswerDetail.find_by_sql thirty_day_user_sql					
+		@thirty_day_answer_count = tmp.count
 	end	
 end

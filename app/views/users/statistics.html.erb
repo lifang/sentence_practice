@@ -1,0 +1,47 @@
+<section class="rankOrder">
+    <h1 style="padding: 0; text-align: center">数据统计</h1>
+    <div class="step">
+    	<table class="table1">
+		    <!-- <tr>
+		     <th>水平</th>
+		     <th>等级</th>
+		    </tr> -->
+		    <tr style="color: #ccc;">
+		     <td>总用户数</td>
+		     <td><%= @user_count %></td>
+		    </tr>
+		    <tr style="color: #0F0;">
+		     <td>总答题数</td>
+		     <td><%= @answer_details_count %></td>
+		    </tr>
+		    <tr style="color: #00F;">
+		     <td>1日内活动用户数与占比</td>
+		     <td><%= @one_day_user_count %></td>
+		    </tr>
+		    <tr style="color: #F0F;">
+		     <td>1日内答题数</td>
+		     <td><%= @one_day_answer_count %></td>
+		    </tr>
+		    <tr style="color: #00F;">
+		     <td>7日内活动用户数</td>
+		     <td><%= @seven_day_user_count %></td>
+		    </tr>
+		    <tr style="color: #00F;">
+		     <td>7日内答题数</td>
+		     <td><%= @seven_day_answer_count %></td>
+		    </tr>
+		    <tr style="color: #00F;">
+		     <td>30日内活动用户数</td>
+		     <td><%= @thirty_day_user_count %></td>
+		    </tr>
+		    <tr style="color: #00F;">
+		     <td>30日内答题数</td>
+		     <td><%= @thirty_day_answer_count %></td>
+		    </tr>
+	    </table>
+    </div>
+</section>
+<section class="btn_box">
+    <a href="/users" class="orange_btn">我的概况</a>
+</section>
+

@@ -4,25 +4,12 @@
             <li style="width:0px; margin-left:-4px;">&nbsp;</li>
         </ul>
 </div>
+<div class="chooseArea">
+    <%= render "choose_options", {:question => @question} %>   
+</div>
 <input type="hidden" value="<%= question.id %>" class="question_id">
 <input type="hidden" value="<%= question.original_sentence %>" class="correct_answer">
-<div class="chooseArea">
-    <ul><% words_count = question.original_sentence.split(" ").length %>
-        <% sentences = [] %>
-        <% if @step == "first" %>
-            <% sentences =  question.original_sentence.split(" ") %>
-        <% elsif @step == "second" %>    
-            <% arr_1 =  question.original_sentence.split(" ").to_a %>
-            <% arr_2 = question.similar_words.split(" ").to_a %>
-            <% sentences = arr_1.concat(arr_2) %>
-        <% end %>
-        <% raddom_number = [] %>
-        <% (0..sentences.length-1).each{|i| raddom_number << i } %>
-        <% raddom_number.shuffle.each do |i| %>
-            <%= load_select_item sentences[i] %>
-        <% end %>
-    </ul>
-</div>
+
 <input type="hidden" value="" class="answer_text">
 <input type="hidden" value="" class="index_order">
 <input type="hidden" value="<%= words_count %>" class="word_number">

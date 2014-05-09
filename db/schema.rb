@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140505032700) do
+ActiveRecord::Schema.define(:version => 20140508071125) do
 
   create_table "answer_details", :force => true do |t|
     t.integer  "question_id"
@@ -52,9 +52,10 @@ ActiveRecord::Schema.define(:version => 20140505032700) do
     t.integer  "complete_per_cent"
     t.integer  "gold"
     t.string   "open_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.string   "nickname"
+    t.boolean  "is_first",          :default => true
   end
 
 end
