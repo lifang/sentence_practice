@@ -150,42 +150,26 @@ class UsersController < ApplicationController
 
 	#统计
 	def statistics
-		user_sql = "SELECT count(*) count FROM users"
-		tmp = User.find_by_sql user_sql
-		@user_count = tmp.count
+		@user_count = User.count
 
-		answer_details_sql = "SELECT count(*) count FROM answer_details"
-		tmp = AnswerDetail.find_by_sql answer_details_sql
-		@answer_details_count = tmp.count
+		@answer_details_count = AnswerDetail.count
 
-		one_day_sql = "SELECT COUNT(DISTINCT user_id) count FROM answer_details 
-				where created_at > CURRENT_TIMESTAMP - INTERVAL 1 day"
-		tmp = AnswerDetail.find_by_sql one_day_sql
-		@one_day_user_count = tmp.count
+		@one_day_user_count = AnswerDetail.select("DISTINCT user_id")
+				   .where("created_at > CURRENT_TIMESTAMP - INTERVAL 1 day").count
 
-		one_day_answer_sql = "SELECT count(*) count FROM answer_details 
-			where created_at > CURRENT_TIMESTAMP - INTERVAL 1 day"
-		tmp = AnswerDetail.find_by_sql one_day_answer_sql
-		@one_day_answer_count = tmp.count
+		@one_day_answer_count =  AnswerDetail
+					.where("created_at > CURRENT_TIMESTAMP - INTERVAL 1 day").count
 
-		seven_day_sql = "SELECT COUNT(DISTINCT user_id) count FROM answer_details 
-					where created_at > CURRENT_TIMESTAMP - INTERVAL 7 day"
-		tmp = AnswerDetail.find_by_sql seven_day_sql
-		@seven_day_user_count = tmp.count 
+		@seven_day_user_count = AnswerDetail.select("DISTINCT user_id")
+				   .where("created_at > CURRENT_TIMESTAMP - INTERVAL 7 day").count 
 
-		seven_day_answer_sql = "SELECT count(*) count FROM answer_details 
-				where created_at > CURRENT_TIMESTAMP - INTERVAL 7 day"
-		tmp = AnswerDetail.find_by_sql seven_day_answer_sql
-		@seven_day_answer_count = tmp.count 
+		@seven_day_answer_count = AnswerDetail
+				   .where("created_at > CURRENT_TIMESTAMP - INTERVAL 7 day").count
 
-		thirty_day_sql = "SELECT COUNT(DISTINCT user_id) count FROM answer_details 
-				where created_at > CURRENT_TIMESTAMP - INTERVAL 30 day"
-		tmp = AnswerDetail.find_by_sql thirty_day_sql
-		@thirty_day_user_count = tmp.count  
-
-		thirty_day_user_sql = "SELECT count(*) count from answer_details
-						where created_at > CURRENT_TIMESTAMP - INTERVAL 30 day"
-		tmp = AnswerDetail.find_by_sql thirty_day_user_sql					
-		@thirty_day_answer_count = tmp.count
+		@thirty_day_user_count = AnswerDetail.select("DISTINCT user_id")
+				   .where("created_at > CURRENT_TIMESTAMP - INTERVAL 30 day").count
+				
+		@thirty_day_answer_count = AnswerDetail
+				   .where("created_at > CURRENT_TIMESTAMP - INTERVAL 30 day").count
 	end	
 end

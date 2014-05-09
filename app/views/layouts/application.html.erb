@@ -10,6 +10,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="viewport" content="user-scalable=no, width=device-width">
   <script type="text/javascript">
+         window.onload=function(){  
+                // if(document.documentElement.scrollHeight <= document.documentElement.clientHeight) {  
+                if(document.documentElement.scrollHeight>0){
+                    bodyTag = document.getElementsByTagName('body')[0];  
+                    bodyTag.style.height = document.documentElement.clientWidth / screen.width * screen.height + 'px';  
+                }  
+                setTimeout(function() {  
+                    window.scrollTo(0, 1)  
+                }, 0);  
+            };
+
+
 	document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
 	    WeixinJSBridge.call('hideToolbar');
 	});
