@@ -4,8 +4,8 @@
 function select_item(obj)
 {
 	$("#back_step_btn").attr("onclick","back_step(this)");
-	$("#back_step_btn").removeClass("gray_btn")
-	$("#back_step_btn").addClass("orange_btn");
+	$("#back_step_btn").removeClass("back_btn_dark")
+	$("#back_step_btn").addClass("back_btn_light");
     var word = $(obj).text();
     $(obj).css("cursor","default");
     var answer = $(".ex_con").find(".answer_text").val();
@@ -89,8 +89,8 @@ function back_step(obj)
 			if(index_order == "")
 			{
 				$("#back_step_btn").removeAttr("onclick");
-				$("#back_step_btn").removeClass("orange_btn");
-				$("#back_step_btn").addClass("gray_btn");
+				$("#back_step_btn").removeClass("back_btn_light");
+				$("#back_step_btn").addClass("back_btn_dark");
 			}
 			else
 			{

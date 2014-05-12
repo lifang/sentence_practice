@@ -15,7 +15,7 @@ button { border: none; cursor: pointer;}
     text-align: center;
     z-index: 2;
 }
-a.orange_btn, a.yellow_btn, a.gray_btn {
+a.orange_btn, a.yellow_btn, a.gray_btn, a.finish_btn, a.back_btn_light, a.back_btn_dark {
 	height: 36px;
 	line-height: 36px;
 	display: block; 
@@ -29,6 +29,10 @@ a.orange_btn, a.yellow_btn, a.gray_btn {
 a.orange_btn { background: #fd6e50; border-bottom: 2px #e95740 solid;}
 a.yellow_btn { background: #ffce55; border-bottom: 2px #f7bb41 solid;}
 a.gray_btn { background: #a4a9ad; border-bottom: 2px #84898d solid;}
+
+a.finish_btn {  background: url(/assets/finish_btn.png) no-repeat center center; }
+a.back_btn_dark {  background: url(/assets/back_btn_dark.png) no-repeat center center; }
+a.back_btn_light {  background: url(/assets/back_btn_light.png) no-repeat center center; }
 
 article { 
 	overflow: hidden; 
