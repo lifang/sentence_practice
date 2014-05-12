@@ -27,8 +27,8 @@ setInterval('startTime()', 1000);
     <input type="hidden" value="" class="current_question_id">
     <input type="hidden" value="<%= @step %>" class="step">
     <input type="hidden" value="0" class="correct_counts">
-	<a href="javascript:void(0)" class="orange_btn s_btn" onclick="check_answer(this)" id="finish_btn" >完成</a>
-    <a href="javascript:void(0)" class="gray_btn s_btn" id="back_step_btn" >退一步</a>
+	<a href="javascript:void(0)" class="orange_btn s_btn" onclick="check_answer(this)" id="finish_btn" style='cursor:pointer;' oncontextmenu='self.event.returnValue=false' onselectstart='return false' >完成</a>
+    <a href="javascript:void(0)" class="gray_btn s_btn" id="back_step_btn" style='cursor:pointer;' oncontextmenu='self.event.returnValue=false' onselectstart='return false' >退一步</a>
 </section>
 <% else %>
     <section class="exercises">
