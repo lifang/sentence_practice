@@ -1,5 +1,6 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
+
 //点选单词
 function select_item(obj)
 {
@@ -158,7 +159,7 @@ function check_answer(obj)
 	}
 }
 
-//
+//弹出窗口
 function popup(div_id)
 {
 	// $("#panel").empty();
@@ -180,6 +181,7 @@ function popup(div_id)
 	$("#panel").show();
 }
 
+//继续答题
 function continue_question(obj)
 {
 	var correct = $(obj).parents(".tab").find(".status").val();
@@ -250,22 +252,27 @@ function startTime()
 	}	
 }
 
+//查看得分
 function view_score(obj)
 {
 	var correct_counts = $(".correct_counts").val();
+	var questions_id = $(".questions_id").val();
 	$.ajax({
 	      async:true,
 	      type: "POST",
 	      url: "/users/calculate_score",
 	      dataType: "script",
 	      data : {
-	      	correct_counts : correct_counts
+	      	correct_counts : correct_counts,
+	      	questions_id : questions_id
 	      },
 	      success: function(data){
 	      }
     });
 }
 
+
+//解锁等级
 function unlock_next_level(obj)
 {
 	var correct_counts = $(".correct_counts").val();
@@ -280,4 +287,53 @@ function unlock_next_level(obj)
 	      success: function(data){
 	      }
     });		
+}
+
+//回顾题目时，切换题目
+function check_qusetion(obj)
+{
+	var num = $(".num").text();
+	var order_and_sum = num.split("/");
+	var order = order_and_sum[0];
+	var sum = order_and_sum[1];
+	order = parseInt(order);
+	sum = parseInt(sum);
+	var btn_id = $(obj).attr("id");
+	// alert(btn_id);
+	var li_index = 0;
+
+	if(sum > 1)
+	{
+		if(btn_id == "next_btn")
+		{
+			if(order < sum)
+			{
+				li_index = order;
+				order = order + 1;
+			}
+			else if(order == sum)
+			{
+				li_index = 0;
+				order = 1;	
+			}
+		}
+		else if(btn_id == "prev_btn")	
+		{
+			if(order == 1)
+			{
+				
+				li_index = sum-1;
+				order = sum;
+			}
+			else if(order > 1)
+			{
+				li_index = order - 2;
+				order = order - 1;
+			}	
+			
+		}
+		$(".num").text("" + order + "/" + sum + "");
+		$("#origin_sentences").find("li").hide();
+		$("#origin_sentences").find("li:eq(" + li_index + ")").show();
+	}	
 }

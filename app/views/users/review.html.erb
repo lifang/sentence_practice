@@ -1,0 +1,36 @@
+<script>
+    $(document).ready(function(){
+        var cw = document.documentElement.clientWidth;
+        $(".btn_box").css("width",cw-40 + "px");
+        $("#origin_sentences").find("li:eq(0)").show();
+    })
+</script>
+<section class="practice top">
+    <h3>回顾</h3>
+    <p class="num"><%= @questions.any? ? 1 : 0 %>/<%= @questions.length %></p>
+</section>
+<section class="btn_box" style="position: fixed;">
+    <input type="hidden" value="" class="current_question_id">
+    <input type="hidden" value="<%= @step %>" class="step">
+    <input type="hidden" value="0" class="correct_counts">
+    <a href="javascript:void(0)" class="<%= (@questions.any? && @questions.length > 1) ? 'prev_light_btn' : 'prev_dark_btn' %> s_btn" onclick="check_qusetion(this)" id="prev_btn" ></a>
+    <a href="javascript:void(0)" class="<%= (@questions.any? && @questions.length > 1) ? 'next_btn_light' : 'next_btn_dark' %> s_btn" onclick="check_qusetion(this)" id="next_btn" ></a>
+</section>
+<ul id="origin_sentences">
+    <% if @questions.any? %>
+        <% @questions.each do |question| %>
+        <li style="display:none;">
+            <div class="txt_box">
+                <p><%= question.original_sentence %></p>
+                <p class="text_1"><%= question.translation %></p>
+            </div>
+        </li>
+        <% end %>
+    <% else %>    
+        <li style="display:none;">
+            <div class="txt_box">
+                <p>您还没有做任何题目哦！</p>
+            </div>
+        </li>     
+    <% end %>
+<ul>

@@ -27,7 +27,7 @@ SentencePractice::Application.routes.draw do
   
   resources :users do 
     collection do
-      get :index, :level_introduction, :oprate_guide, :promotion, :show_score, :share, :statistics
+      get :index, :level_introduction, :oprate_guide, :promotion, :show_score, :share, :statistics, :review
       post :calculate_score, :unlock_next_level
     end  
   end

@@ -2,6 +2,13 @@
 	<% words_count = @question.original_sentence.split(" ").length %>
 	$(".ex_con").html('<%=j(render "one_que", {:question => @question, :words_count => words_count})%>');
 	$(".chooseArea").html('<%=j(render "choose_options", {:question => @question})%>');
+	var questions_id = $(".questions_id").val();
+	var question_id = "<%= @question.id %>";
+	if(questions_id.indexOf(question_id) == -1)
+	{
+		questions_id += ",," + question_id;
+		$(".questions_id").val(questions_id);	
+	}
 	var old_step = $(".step").val();
 	var new_step = "<%= @step %>";
 	if(old_step == new_step)

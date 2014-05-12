@@ -1,4 +1,5 @@
 #encoding: utf-8
+include QuestionsHelper
 class UsersController < ApplicationController
 	#我的概览
 	def index
@@ -38,6 +39,10 @@ class UsersController < ApplicationController
 		user = User.find_by_id user_id
 		correct_counts = params[:correct_counts]
 		@correct_counts = correct_counts.to_i
+		questions_id = params[:questions_id]
+		questions_id = encode_str questions_id
+		@questions_id = questions_id.gsub(/\n/,"")
+		p @questions_id
 		@gold = user.gold
 		if user
 			if @correct_counts < 5
@@ -55,6 +60,7 @@ class UsersController < ApplicationController
 	#显示得分
 	def show_score
 		@correct_counts =  params[:correct_counts].to_i
+		@collections_id = params[:collections_id]
 		@gold = params[:gold].to_i
 		user_id = cookies[:user_id]
 		@user = User.find_by_id user_id
@@ -171,5 +177,18 @@ class UsersController < ApplicationController
 				
 		@thirty_day_answer_count = AnswerDetail
 				   .where("created_at > CURRENT_TIMESTAMP - INTERVAL 30 day").count
+	end	
+
+	#回顾
+	def review
+		questions_id = params[:questions_id]
+		@questions = []
+		if questions_id.present?
+			questions_id = decode_str questions_id
+			questions_id = questions_id.split(",,")
+			if questions_id.any?
+				@questions = Question.where("id in (?)", questions_id)
+			end
+		end
 	end	
 end

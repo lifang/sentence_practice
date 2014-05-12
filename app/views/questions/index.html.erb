@@ -32,6 +32,7 @@ setInterval('startTime()', 1000);
     <input type="hidden" value="" class="current_question_id">
     <input type="hidden" value="<%= @step %>" class="step">
     <input type="hidden" value="0" class="correct_counts">
+    <input type="text" value="<%= @question.id %>" class="questions_id">
 	<a href="javascript:void(0)" class="finish_btn s_btn" onclick="check_answer(this)" id="finish_btn" ></a>
     <a href="javascript:void(0)" class="back_btn_dark s_btn" id="back_step_btn" ></a>
 </section>

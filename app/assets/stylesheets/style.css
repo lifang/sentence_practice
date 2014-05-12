@@ -15,7 +15,7 @@ button { border: none; cursor: pointer;}
     text-align: center;
     z-index: 2;
 }
-a.orange_btn, a.yellow_btn, a.gray_btn, a.finish_btn, a.back_btn_light, a.back_btn_dark {
+a.orange_btn, a.yellow_btn, a.gray_btn, a.finish_btn, a.back_btn_light, a.back_btn_dark, a.prev_light_btn, a.prev_dark_btn, a.next_btn_light, a.next_btn_dark {
 	height: 36px;
 	line-height: 36px;
 	display: block; 
@@ -33,7 +33,10 @@ a.gray_btn { background: #a4a9ad; border-bottom: 2px #84898d solid;}
 a.finish_btn {  background: url(/assets/finish_btn.png) no-repeat center center; }
 a.back_btn_dark {  background: url(/assets/back_btn_dark.png) no-repeat center center; }
 a.back_btn_light {  background: url(/assets/back_btn_light.png) no-repeat center center; }
-
+a.prev_dark_btn {  background: url(/assets/prev_dark.png) no-repeat center center; background-size: 110px 40px; }
+a.prev_light_btn {  background: url(/assets/prev_light.png) no-repeat center center; background-size: 110px 40px; }
+a.next_btn_dark {  background: url(/assets/next_dark.png) no-repeat center center; background-size: 110px 40px;}
+a.next_btn_light {  background: url(/assets/next_light.png) no-repeat center center; background-size: 110px 40px;}
 article { 
 	overflow: hidden; 
 	position: relative; 
@@ -196,7 +199,19 @@ article:after{
 .practice li label.complete_icon { background: url(/assets/complete_icon.png) no-repeat 0px center; background-size: 26px 26px;}
 .practice li label.gold_icon { background: url(/assets/gold_icon.png) no-repeat 0px center; background-size: 26px 26px;}
 .practice li span {display: inline-block;}
+.practice h3 {
+	text-align: center;
+	margin:  10px;
+}
+.practice p.num {
+	text-align: center;
+	margin:  10px;
+}
+.practice.top { position: fixed; top: 0; width:  100%; margin: 0; background: #fff;}
 
+.txt_box { margin: 80px auto; width: 260px;}
+.txt_box p { line-height: 24px; color: #2c2c2c; margin:  10px; }
+.txt_box p.text_1 { color: #c2c2c2;}
 
 /*9*/
 .practice h1.winner { background: url(/assets/smile.png) no-repeat 21px center; background-size: 40px 40px;}

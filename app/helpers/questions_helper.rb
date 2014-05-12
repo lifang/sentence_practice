@@ -1,4 +1,5 @@
 module QuestionsHelper
+	require "base64"
 	def load_select_item content
 		li = "<li onclick='select_item(this)' style='cursor:pointer;' oncontextmenu='self.event.returnValue=false'
 onselectstart='return false'>#{content}</li>"
@@ -25,4 +26,14 @@ onselectstart='return false'>#{content}</li>"
 		end
 		level_name.html_safe	
 	end	
+
+	def encode_str str
+		str = Base64.encode64(str)
+		str
+	end
+
+	def decode_str str
+		str = Base64.decode64(str)
+		str
+	end
 end
