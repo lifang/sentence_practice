@@ -121,8 +121,8 @@ function check_answer(obj)
 	// $("#finish_btn").removeClass("orange_btn");
 	// $("#finish_btn").addClass("gray_btn");
 	// $("#finish_btn").removeAttr("onclick");
-	$("#back_step_btn").removeClass("orange_btn");
-	$("#back_step_btn").addClass("gray_btn");
+	$("#back_step_btn").removeClass("back_btn_light");
+	$("#back_step_btn").addClass("back_btn_dark");
 	$("#back_step_btn").removeAttr("onclick");
 	if(answer == correct_answer)
 	{
