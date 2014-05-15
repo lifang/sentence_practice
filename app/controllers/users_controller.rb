@@ -16,7 +16,8 @@ class UsersController < ApplicationController
 				@questions = Question.where(["level_types = ?", @user.level])
 				@current_level_questions_count = current_level_questions.length
 				@one_day_answer_count =  AnswerDetail
-					.where("created_at > CURRENT_TIMESTAMP - INTERVAL 1 day and user_id = #{@user.id}").count
+					.where("(created_at > CURRENT_TIMESTAMP - INTERVAL 1 day or 
+						updated_at > CURRENT_TIMESTAMP - INTERVAL 1 day) and user_id = #{@user.id}").count
 				if @step == "first"
 					@finish_questions_count = AnswerDetail.where(["question_id in (?) and first_status = ? and user_id = ?",
 						current_level_questions_id, true, @user.id]).count if current_level_questions_id.present? && 
@@ -44,7 +45,7 @@ class UsersController < ApplicationController
 		questions_id = params[:questions_id]
 		questions_id = encode_str questions_id
 		@questions_id = questions_id.gsub(/\n/,"")
-		p @questions_id
+		# p @questions_id
 		@gold = user.gold
 		if user
 			if @correct_counts < 5
@@ -163,22 +164,28 @@ class UsersController < ApplicationController
 		@answer_details_count = AnswerDetail.count
 
 		@one_day_user_count = AnswerDetail.select("DISTINCT user_id")
-				   .where("created_at > CURRENT_TIMESTAMP - INTERVAL 1 day").count
+				   .where("created_at > CURRENT_TIMESTAMP - INTERVAL 1 day or 
+						updated_at > CURRENT_TIMESTAMP - INTERVAL 1 day").count
 
 		@one_day_answer_count =  AnswerDetail
-					.where("created_at > CURRENT_TIMESTAMP - INTERVAL 1 day").count
+					.where("created_at > CURRENT_TIMESTAMP - INTERVAL 1 day or 
+						updated_at > CURRENT_TIMESTAMP - INTERVAL 1 day").count
 
 		@seven_day_user_count = AnswerDetail.select("DISTINCT user_id")
-				   .where("created_at > CURRENT_TIMESTAMP - INTERVAL 7 day").count 
+				   .where("created_at > CURRENT_TIMESTAMP - INTERVAL 7 day or
+				   		updated_at > CURRENT_TIMESTAMP - INTERVAL 7 day ").count 
 
 		@seven_day_answer_count = AnswerDetail
-				   .where("created_at > CURRENT_TIMESTAMP - INTERVAL 7 day").count
+				   .where("created_at > CURRENT_TIMESTAMP - INTERVAL 7 day or 
+				   		updated_at > CURRENT_TIMESTAMP - INTERVAL 7 day").count
 
 		@thirty_day_user_count = AnswerDetail.select("DISTINCT user_id")
-				   .where("created_at > CURRENT_TIMESTAMP - INTERVAL 30 day").count
+				   .where("created_at > CURRENT_TIMESTAMP - INTERVAL 30 day or 
+				   		updated_at > CURRENT_TIMESTAMP - INTERVAL 30 day").count
 				
 		@thirty_day_answer_count = AnswerDetail
-				   .where("created_at > CURRENT_TIMESTAMP - INTERVAL 30 day").count
+				   .where("created_at > CURRENT_TIMESTAMP - INTERVAL 30 day or 
+				   		updated_at > CURRENT_TIMESTAMP - INTERVAL 30 day").count
 	end	
 
 	#回顾
