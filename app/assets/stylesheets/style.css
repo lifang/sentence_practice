@@ -82,6 +82,7 @@ article:after{
 .aboutMe li label.grade_icon { background: url(/assets/grade_icon.png) no-repeat 0px center; background-size: 26px 26px;}
 .aboutMe li label.complete_icon { background: url(/assets/complete_icon.png) no-repeat 0px center; background-size: 26px 26px;}
 .aboutMe li label.gold_icon { background: url(/assets/gold_icon.png) no-repeat 0px center; background-size: 26px 26px;}
+.aboutMe li label.que_icon { background: url(/assets/que.png) no-repeat 0px center; background-size: 26px 26px;}
 .aboutMe li span { width: 100px; display: inline-block;}
 .aboutMe li a { 
 	display: inline-block; 
