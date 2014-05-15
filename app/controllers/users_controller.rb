@@ -15,6 +15,8 @@ class UsersController < ApplicationController
 				current_level_questions_id = current_level_questions.map(&:id)
 				@questions = Question.where(["level_types = ?", @user.level])
 				@current_level_questions_count = current_level_questions.length
+				@one_day_answer_count =  AnswerDetail
+					.where("created_at > CURRENT_TIMESTAMP - INTERVAL 1 day and user_id = #{@user.id}").count
 				if @step == "first"
 					@finish_questions_count = AnswerDetail.where(["question_id in (?) and first_status = ? and user_id = ?",
 						current_level_questions_id, true, @user.id]).count if current_level_questions_id.present? && 
